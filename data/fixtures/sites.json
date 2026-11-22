@@ -1,0 +1,90 @@
+[
+  {
+    "description": "Finance restricted documents",
+    "externalSharing": "Disabled",
+    "fixture": true,
+    "id": "960e8c94-82ca-53ed-953a-4796e25d6961",
+    "name": "Finance-Restricted",
+    "owners": [
+      "elena.rossi@northwind.example"
+    ],
+    "sensitivityLabel": "Restricted"
+  },
+  {
+    "description": "Legal matter documents",
+    "externalSharing": "Disabled",
+    "fixture": true,
+    "id": "f6f53143-4c45-5b2f-98ca-fe1e50ebf66d",
+    "name": "Legal-Confidential",
+    "owners": [
+      "catherine.doyle@northwind.example"
+    ],
+    "sensitivityLabel": "Restricted"
+  },
+  {
+    "description": "Engineering knowledge base",
+    "externalSharing": "ExistingGuests",
+    "fixture": true,
+    "id": "5368bc4d-8b6d-5d07-a62e-98114e1e37d0",
+    "name": "Engineering-Wiki",
+    "owners": [
+      "raj.patel@northwind.example"
+    ],
+    "sensitivityLabel": "Internal"
+  },
+  {
+    "description": "Sales decks and collateral",
+    "externalSharing": "NewAndExistingGuests",
+    "fixture": true,
+    "id": "f8bb52cc-e90c-5225-b108-43b40d27a48b",
+    "name": "Sales-Enablement",
+    "owners": [
+      "olivia.grant@northwind.example"
+    ],
+    "sensitivityLabel": "Internal"
+  },
+  {
+    "description": "HR policies for all staff",
+    "externalSharing": "Disabled",
+    "fixture": true,
+    "id": "45cd73f0-c430-53fe-a322-6b607def794d",
+    "name": "HR-Policies",
+    "owners": [
+      "hannah.price@northwind.example"
+    ],
+    "sensitivityLabel": "Internal"
+  },
+  {
+    "description": "Project Atlas site. Library 'Atlas-Commercials' is labelled Confidential.",
+    "externalSharing": "NewAndExistingGuests",
+    "fixture": true,
+    "id": "cf2fa28d-3384-5101-aa0a-0b88a0a2d76a",
+    "name": "Project-Atlas",
+    "owners": [
+      "raj.patel@northwind.example"
+    ],
+    "sensitivityLabel": "Internal"
+  },
+  {
+    "description": "Marketing assets",
+    "externalSharing": "ExistingGuests",
+    "fixture": true,
+    "id": "a0dabcf2-ae9c-5b70-a3f0-26a0f5125599",
+    "name": "Marketing-Assets",
+    "owners": [
+      "chloe.wright@northwind.example"
+    ],
+    "sensitivityLabel": "Internal"
+  },
+  {
+    "description": "Supplier contracts",
+    "externalSharing": "ExistingGuests",
+    "fixture": true,
+    "id": "41322b15-cd48-5124-84b9-f4c5e7dc03b8",
+    "name": "Procurement-Contracts",
+    "owners": [
+      "victoria.hayes@northwind.example"
+    ],
+    "sensitivityLabel": "Confidential"
+  }
+]

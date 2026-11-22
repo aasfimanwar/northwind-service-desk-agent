@@ -1,0 +1,35 @@
+{
+  "files": {
+    "devices.jsonl": {
+      "records": 19757,
+      "sha256": "9c652f7d7e5206bca51e9a5792355bc14b49b1a3bfa3d9997424082ec46b1b82"
+    },
+    "groups.jsonl": {
+      "records": 142,
+      "sha256": "e8f46c45a6004641d731427671878c0ff2f2df9fe5b62f780a1a48fc0bf115e0"
+    },
+    "hr_records.jsonl": {
+      "records": 11956,
+      "sha256": "8e38353158027ac9b791bec5b65cdf529081441ff5d210a87843bec790f315b0"
+    },
+    "memberships.jsonl": {
+      "records": 8175,
+      "sha256": "2e8acb719a38007d9e1be4d79a25b1a87cd747361962ab70bcc9bf7db224d7d9"
+    },
+    "sites.jsonl": {
+      "records": 89,
+      "sha256": "f98a01a20fab2fd2a6f224ad7aa709766a0ad7b69eae9a3b5a1fe6418812ed66"
+    },
+    "users.jsonl": {
+      "records": 11956,
+      "sha256": "4662385c44688ce6c90a125dbb1727fc8fa5e39d668f3840d04bbc6c970841c5"
+    }
+  },
+  "generator": "tools/gen_company.py",
+  "seed": "northwind-v1",
+  "totals": {
+    "fixture_staff": 44,
+    "generated_users": 11956,
+    "total_staff": 12000
+  }
+}

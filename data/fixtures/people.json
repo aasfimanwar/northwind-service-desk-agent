@@ -1,0 +1,815 @@
+[
+  {
+    "accountEnabled": true,
+    "authMethods": [
+      "authenticator_app"
+    ],
+    "band": "L9",
+    "country": "GB",
+    "department": "Executive",
+    "displayName": "Amanda Sterling",
+    "employeeId": "NW90001",
+    "fixture": true,
+    "id": "d5a7b58f-3f8b-52cc-bf85-6541db9b860f",
+    "jobTitle": "Chief Executive Officer",
+    "managerUpn": null,
+    "officeLocation": "London",
+    "upn": "amanda.sterling@northwind.example",
+    "userType": "Employee"
+  },
+  {
+    "accountEnabled": true,
+    "authMethods": [
+      "authenticator_app"
+    ],
+    "band": "L8",
+    "country": "GB",
+    "department": "Finance",
+    "displayName": "David Okafor",
+    "employeeId": "NW90002",
+    "fixture": true,
+    "id": "5f68e3fc-6a15-543f-9cfe-6c939813bada",
+    "jobTitle": "Chief Financial Officer",
+    "managerUpn": "amanda.sterling@northwind.example",
+    "officeLocation": "London",
+    "upn": "david.okafor@northwind.example",
+    "userType": "Employee"
+  },
+  {
+    "accountEnabled": true,
+    "authMethods": [
+      "authenticator_app"
+    ],
+    "band": "L4",
+    "country": "GB",
+    "department": "Finance",
+    "displayName": "Rachel Stone",
+    "employeeId": "NW90003",
+    "fixture": true,
+    "id": "8561c72d-0eb8-5381-b42c-e6518c3993ac",
+    "jobTitle": "Executive Assistant",
+    "managerUpn": "david.okafor@northwind.example",
+    "officeLocation": "London",
+    "upn": "rachel.stone@northwind.example",
+    "userType": "Employee"
+  },
+  {
+    "accountEnabled": true,
+    "authMethods": [
+      "authenticator_app"
+    ],
+    "band": "L7",
+    "country": "GB",
+    "department": "Finance",
+    "displayName": "Elena Rossi",
+    "employeeId": "NW90004",
+    "fixture": true,
+    "id": "e07092f0-0d27-525b-b7ee-984031118470",
+    "jobTitle": "Finance Director",
+    "managerUpn": "david.okafor@northwind.example",
+    "officeLocation": "London",
+    "upn": "elena.rossi@northwind.example",
+    "userType": "Employee"
+  },
+  {
+    "accountEnabled": true,
+    "authMethods": [
+      "authenticator_app"
+    ],
+    "band": "L6",
+    "country": "GB",
+    "department": "Finance",
+    "displayName": "Marcus Bell",
+    "employeeId": "NW90005",
+    "fixture": true,
+    "id": "7d55fd43-df38-552c-a0f5-bcbeb9a0fa3c",
+    "jobTitle": "Finance Controller",
+    "managerUpn": "elena.rossi@northwind.example",
+    "officeLocation": "London",
+    "upn": "marcus.bell@northwind.example",
+    "userType": "Employee"
+  },
+  {
+    "accountEnabled": true,
+    "authMethods": [
+      "authenticator_app (registered on a phone no longer in her possession)"
+    ],
+    "band": "L5",
+    "country": "GB",
+    "department": "Finance",
+    "displayName": "Priya Nair",
+    "employeeId": "NW90006",
+    "fixture": true,
+    "id": "aaebd795-d00c-529b-a877-393ccafbe162",
+    "jobTitle": "Senior Finance Analyst",
+    "managerUpn": "marcus.bell@northwind.example",
+    "officeLocation": "London",
+    "upn": "priya.nair@northwind.example",
+    "userType": "Employee"
+  },
+  {
+    "accountEnabled": true,
+    "authMethods": [
+      "authenticator_app"
+    ],
+    "band": "L3",
+    "country": "GB",
+    "department": "Finance",
+    "displayName": "Callum Reid",
+    "employeeId": "NW90007",
+    "fixture": true,
+    "id": "305ef048-cf5e-5be5-9309-10b99873a809",
+    "jobTitle": "Finance Analyst",
+    "managerUpn": "marcus.bell@northwind.example",
+    "officeLocation": "London",
+    "upn": "callum.reid@northwind.example",
+    "userType": "Employee"
+  },
+  {
+    "accountEnabled": true,
+    "authMethods": [
+      "authenticator_app"
+    ],
+    "band": "L8",
+    "country": "GB",
+    "department": "Engineering",
+    "displayName": "Helen Cross",
+    "employeeId": "NW90008",
+    "fixture": true,
+    "id": "0ca7f277-b4c6-54a7-8b5b-2e025e2eb23c",
+    "jobTitle": "Chief Technology Officer",
+    "managerUpn": "amanda.sterling@northwind.example",
+    "officeLocation": "Birmingham",
+    "upn": "helen.cross@northwind.example",
+    "userType": "Employee"
+  },
+  {
+    "accountEnabled": true,
+    "authMethods": [
+      "authenticator_app"
+    ],
+    "band": "L7",
+    "country": "GB",
+    "department": "Engineering",
+    "displayName": "Raj Patel",
+    "employeeId": "NW90009",
+    "fixture": true,
+    "id": "0fee5764-2149-548c-bedf-bddf7a076455",
+    "jobTitle": "Director of Engineering",
+    "managerUpn": "helen.cross@northwind.example",
+    "officeLocation": "Birmingham",
+    "upn": "raj.patel@northwind.example",
+    "userType": "Employee"
+  },
+  {
+    "accountEnabled": true,
+    "authMethods": [
+      "authenticator_app"
+    ],
+    "band": "L6",
+    "country": "GB",
+    "department": "Engineering",
+    "displayName": "Sarah Whitfield",
+    "employeeId": "NW90010",
+    "fixture": true,
+    "id": "cf0448d2-52b6-5e01-94b2-69c6ca6a2b04",
+    "jobTitle": "Engineering Manager",
+    "managerUpn": "raj.patel@northwind.example",
+    "officeLocation": "Birmingham",
+    "upn": "sarah.whitfield@northwind.example",
+    "userType": "Employee"
+  },
+  {
+    "accountEnabled": true,
+    "authMethods": [
+      "authenticator_app"
+    ],
+    "band": "L4",
+    "country": "GB",
+    "department": "Engineering",
+    "displayName": "Tom Hargreaves",
+    "employeeId": "NW90011",
+    "fixture": true,
+    "id": "89554370-b36e-5cb5-9be0-ee83b1db9999",
+    "jobTitle": "Software Engineer",
+    "managerUpn": "sarah.whitfield@northwind.example",
+    "officeLocation": "Birmingham",
+    "upn": "tom.hargreaves@northwind.example",
+    "userType": "Employee"
+  },
+  {
+    "accountEnabled": true,
+    "authMethods": [
+      "authenticator_app"
+    ],
+    "band": "L3",
+    "country": "GB",
+    "department": "Engineering",
+    "displayName": "Emily Walsh",
+    "employeeId": "NW90012",
+    "fixture": true,
+    "id": "44f5b91a-10db-5ad3-b945-990a0e18d2d4",
+    "jobTitle": "Software Engineer",
+    "managerUpn": "sarah.whitfield@northwind.example",
+    "officeLocation": "Birmingham",
+    "upn": "emily.walsh@northwind.example",
+    "userType": "Employee"
+  },
+  {
+    "accountEnabled": true,
+    "agency": "Brightpath Staffing",
+    "authMethods": [
+      "authenticator_app"
+    ],
+    "band": "C1",
+    "contractEnd": "2027-02-28",
+    "country": "GB",
+    "department": "Engineering",
+    "displayName": "Sam Jordan",
+    "employeeId": "NW90013",
+    "fixture": true,
+    "id": "d6aba913-bd0c-5096-8f77-dd8e8eb5e5ea",
+    "jobTitle": "Software Engineer (contractor, Brightpath Staffing)",
+    "managerUpn": "sarah.whitfield@northwind.example",
+    "officeLocation": "Birmingham",
+    "sponsorUpn": "sarah.whitfield@northwind.example",
+    "upn": "sam.jordan@northwind.example",
+    "userType": "Contractor"
+  },
+  {
+    "accountEnabled": true,
+    "authMethods": [
+      "authenticator_app"
+    ],
+    "band": "L6",
+    "country": "IN",
+    "department": "Engineering",
+    "displayName": "Ananya Rao",
+    "employeeId": "NW90014",
+    "fixture": true,
+    "id": "5d143554-1d7f-5204-a762-88917c17de5a",
+    "jobTitle": "Engineering Manager",
+    "managerUpn": "raj.patel@northwind.example",
+    "officeLocation": "Pune",
+    "upn": "ananya.rao@northwind.example",
+    "userType": "Employee"
+  },
+  {
+    "accountEnabled": true,
+    "authMethods": [
+      "authenticator_app"
+    ],
+    "band": "L4",
+    "country": "IN",
+    "department": "Engineering",
+    "displayName": "Arjun Mehta",
+    "employeeId": "NW90015",
+    "fixture": true,
+    "id": "a681768c-74a8-5d20-b665-2bcc89e7c9f7",
+    "jobTitle": "Software Engineer",
+    "managerUpn": "ananya.rao@northwind.example",
+    "officeLocation": "Pune",
+    "upn": "arjun.mehta@northwind.example",
+    "userType": "Employee"
+  },
+  {
+    "accountEnabled": true,
+    "authMethods": [
+      "authenticator_app"
+    ],
+    "band": "L7",
+    "country": "GB",
+    "department": "Sales",
+    "displayName": "Victor Lang",
+    "employeeId": "NW90016",
+    "fixture": true,
+    "id": "d17c8893-0d2c-5479-afab-3a2897ad81ad",
+    "jobTitle": "Sales Director UK and Ireland",
+    "managerUpn": "amanda.sterling@northwind.example",
+    "officeLocation": "London",
+    "upn": "victor.lang@northwind.example",
+    "userType": "Employee"
+  },
+  {
+    "accountEnabled": true,
+    "authMethods": [
+      "authenticator_app"
+    ],
+    "band": "L6",
+    "country": "GB",
+    "department": "Sales",
+    "displayName": "Olivia Grant",
+    "employeeId": "NW90017",
+    "fixture": true,
+    "id": "e39dfbf6-b587-54d5-9597-4c4d27eca1a5",
+    "jobTitle": "Regional Sales Manager",
+    "managerUpn": "victor.lang@northwind.example",
+    "officeLocation": "Manchester",
+    "upn": "olivia.grant@northwind.example",
+    "userType": "Employee"
+  },
+  {
+    "accountEnabled": true,
+    "authMethods": [
+      "authenticator_app"
+    ],
+    "band": "L3",
+    "country": "GB",
+    "department": "Sales",
+    "displayName": "Jamie Collins",
+    "employeeId": "NW90018",
+    "fixture": true,
+    "id": "4ba85777-1663-5647-91b8-56ec63f9f6fd",
+    "jobTitle": "Sales Executive",
+    "managerUpn": "olivia.grant@northwind.example",
+    "officeLocation": "Manchester",
+    "upn": "jamie.collins@northwind.example",
+    "userType": "Employee"
+  },
+  {
+    "accountEnabled": true,
+    "authMethods": [
+      "authenticator_app"
+    ],
+    "band": "L3",
+    "country": "GB",
+    "department": "Sales",
+    "displayName": "Connor Price",
+    "employeeId": "NW90019",
+    "fixture": true,
+    "id": "25168105-a3e4-5590-8fad-6dee7f93362d",
+    "jobTitle": "Sales Executive",
+    "managerUpn": "olivia.grant@northwind.example",
+    "officeLocation": "Manchester",
+    "upn": "connor.price@northwind.example",
+    "userType": "Employee"
+  },
+  {
+    "accountEnabled": true,
+    "authMethods": [
+      "authenticator_app"
+    ],
+    "band": "L3",
+    "country": "GB",
+    "department": "Sales",
+    "displayName": "Kevin Doherty",
+    "employeeId": "NW90020",
+    "fixture": true,
+    "id": "79e57d42-611f-55cc-b423-83ee19cbaad5",
+    "jobTitle": "Sales Executive",
+    "managerUpn": "olivia.grant@northwind.example",
+    "officeLocation": "Manchester",
+    "upn": "kevin.doherty@northwind.example",
+    "userType": "Employee"
+  },
+  {
+    "accountEnabled": true,
+    "authMethods": [
+      "authenticator_app"
+    ],
+    "band": "L3",
+    "country": "GB",
+    "department": "Sales",
+    "displayName": "Noah Bennett",
+    "employeeId": "NW90021",
+    "fixture": true,
+    "id": "53e0e8b4-ef9a-512f-a8b5-f390e9315c70",
+    "jobTitle": "Sales Executive",
+    "managerUpn": "olivia.grant@northwind.example",
+    "officeLocation": "Manchester",
+    "upn": "noah.bennett@northwind.example",
+    "userType": "Employee"
+  },
+  {
+    "accountEnabled": true,
+    "authMethods": [
+      "authenticator_app"
+    ],
+    "band": "L7",
+    "country": "US",
+    "department": "Sales",
+    "displayName": "Michael Chen",
+    "employeeId": "NW90022",
+    "fixture": true,
+    "id": "43c8cdac-1da0-5504-9772-dab8a98302e6",
+    "jobTitle": "Sales Director North America",
+    "managerUpn": "amanda.sterling@northwind.example",
+    "officeLocation": "Chicago",
+    "upn": "michael.chen@northwind.example",
+    "userType": "Employee"
+  },
+  {
+    "accountEnabled": true,
+    "authMethods": [
+      "authenticator_app"
+    ],
+    "band": "L7",
+    "country": "GB",
+    "department": "People",
+    "displayName": "Hannah Price",
+    "employeeId": "NW90023",
+    "fixture": true,
+    "id": "a58c4cf7-9a33-5457-bbc6-ad3b5502ab20",
+    "jobTitle": "People Director",
+    "managerUpn": "amanda.sterling@northwind.example",
+    "officeLocation": "London",
+    "upn": "hannah.price@northwind.example",
+    "userType": "Employee"
+  },
+  {
+    "accountEnabled": true,
+    "authMethods": [
+      "authenticator_app"
+    ],
+    "band": "L5",
+    "country": "GB",
+    "department": "People",
+    "displayName": "Aisha Khan",
+    "employeeId": "NW90024",
+    "fixture": true,
+    "id": "023f7572-2ff4-5970-9dbd-2ecb68bc3004",
+    "jobTitle": "HR Business Partner",
+    "managerUpn": "hannah.price@northwind.example",
+    "officeLocation": "Leeds",
+    "upn": "aisha.khan@northwind.example",
+    "userType": "Employee"
+  },
+  {
+    "accountEnabled": true,
+    "authMethods": [
+      "authenticator_app"
+    ],
+    "band": "L4",
+    "country": "GB",
+    "department": "People",
+    "displayName": "Yasmin Farouk",
+    "employeeId": "NW90025",
+    "fixture": true,
+    "id": "99258158-4c8c-5e46-8926-4e11b8b99bf3",
+    "jobTitle": "HR Operations Advisor",
+    "managerUpn": "hannah.price@northwind.example",
+    "officeLocation": "Leeds",
+    "upn": "yasmin.farouk@northwind.example",
+    "userType": "Employee"
+  },
+  {
+    "accountEnabled": true,
+    "authMethods": [
+      "authenticator_app"
+    ],
+    "band": "L8",
+    "country": "GB",
+    "department": "IT Services",
+    "displayName": "Noor Ahmed",
+    "employeeId": "NW90026",
+    "fixture": true,
+    "id": "527e427c-2716-588f-8204-9641329dfb40",
+    "jobTitle": "Chief Information Security Officer",
+    "managerUpn": "helen.cross@northwind.example",
+    "officeLocation": "London",
+    "upn": "noor.ahmed@northwind.example",
+    "userType": "Employee"
+  },
+  {
+    "accountEnabled": true,
+    "authMethods": [
+      "authenticator_app"
+    ],
+    "band": "L5",
+    "country": "GB",
+    "department": "IT Services",
+    "displayName": "Fatima Hussain",
+    "employeeId": "NW90027",
+    "fixture": true,
+    "id": "7fe99bc6-5f8b-5080-9c40-6531903fe621",
+    "jobTitle": "IT Security Analyst",
+    "managerUpn": "noor.ahmed@northwind.example",
+    "officeLocation": "Birmingham",
+    "upn": "fatima.hussain@northwind.example",
+    "userType": "Employee"
+  },
+  {
+    "accountEnabled": true,
+    "authMethods": [
+      "authenticator_app"
+    ],
+    "band": "L4",
+    "country": "GB",
+    "department": "IT Services",
+    "displayName": "George Mills",
+    "employeeId": "NW90028",
+    "fixture": true,
+    "id": "1ec97417-1b0e-52a7-8f97-0c319c4f5f3d",
+    "jobTitle": "Service Desk Analyst (Level 2)",
+    "managerUpn": "helen.cross@northwind.example",
+    "officeLocation": "Birmingham",
+    "upn": "george.mills@northwind.example",
+    "userType": "Employee"
+  },
+  {
+    "accountEnabled": true,
+    "authMethods": [
+      "authenticator_app"
+    ],
+    "band": "L8",
+    "country": "GB",
+    "department": "Legal and Compliance",
+    "displayName": "Catherine Doyle",
+    "employeeId": "NW90029",
+    "fixture": true,
+    "id": "78e98240-05d4-5e55-a903-48aedcb4aea0",
+    "jobTitle": "General Counsel",
+    "managerUpn": "amanda.sterling@northwind.example",
+    "officeLocation": "London",
+    "upn": "catherine.doyle@northwind.example",
+    "userType": "Employee"
+  },
+  {
+    "accountEnabled": true,
+    "authMethods": [
+      "authenticator_app"
+    ],
+    "band": "L5",
+    "country": "GB",
+    "department": "Legal and Compliance",
+    "displayName": "Liam O'Brien",
+    "employeeId": "NW90030",
+    "fixture": true,
+    "id": "fba2b001-f5d7-5e8d-9974-7765a712cca3",
+    "jobTitle": "Legal Counsel",
+    "managerUpn": "catherine.doyle@northwind.example",
+    "officeLocation": "London",
+    "upn": "liam.obrien@northwind.example",
+    "userType": "Employee"
+  },
+  {
+    "accountEnabled": true,
+    "authMethods": [
+      "authenticator_app"
+    ],
+    "band": "L7",
+    "country": "GB",
+    "department": "Procurement",
+    "displayName": "Victoria Hayes",
+    "employeeId": "NW90031",
+    "fixture": true,
+    "id": "8fe12168-638e-5a3e-a8fc-f6baa7a2c820",
+    "jobTitle": "Procurement Director",
+    "managerUpn": "david.okafor@northwind.example",
+    "officeLocation": "London",
+    "upn": "victoria.hayes@northwind.example",
+    "userType": "Employee"
+  },
+  {
+    "accountEnabled": true,
+    "authMethods": [
+      "authenticator_app"
+    ],
+    "band": "L4",
+    "country": "GB",
+    "department": "Procurement",
+    "displayName": "Ben Turner",
+    "employeeId": "NW90032",
+    "fixture": true,
+    "id": "02f42458-bb3c-5f7a-a234-2c25cc1144b2",
+    "jobTitle": "Procurement Specialist",
+    "managerUpn": "victoria.hayes@northwind.example",
+    "officeLocation": "London",
+    "upn": "ben.turner@northwind.example",
+    "userType": "Employee"
+  },
+  {
+    "accountEnabled": true,
+    "authMethods": [
+      "authenticator_app"
+    ],
+    "band": "L7",
+    "country": "GB",
+    "department": "Marketing",
+    "displayName": "Jessica Long",
+    "employeeId": "NW90033",
+    "fixture": true,
+    "id": "291a6a0e-5908-5307-b28e-23caf30a6597",
+    "jobTitle": "Marketing Director",
+    "managerUpn": "amanda.sterling@northwind.example",
+    "officeLocation": "Bristol",
+    "upn": "jessica.long@northwind.example",
+    "userType": "Employee"
+  },
+  {
+    "accountEnabled": true,
+    "authMethods": [
+      "authenticator_app"
+    ],
+    "band": "L6",
+    "country": "GB",
+    "department": "Marketing",
+    "displayName": "Chloe Wright",
+    "employeeId": "NW90034",
+    "fixture": true,
+    "id": "81c0fd10-833d-51a4-bef4-06b7137705d1",
+    "jobTitle": "Marketing Manager",
+    "managerUpn": "jessica.long@northwind.example",
+    "officeLocation": "Bristol",
+    "upn": "chloe.wright@northwind.example",
+    "userType": "Employee"
+  },
+  {
+    "accountEnabled": true,
+    "authMethods": [
+      "authenticator_app"
+    ],
+    "band": "L3",
+    "country": "GB",
+    "department": "Marketing",
+    "displayName": "Nadia Ali",
+    "employeeId": "NW90035",
+    "fixture": true,
+    "id": "29dae43c-44e3-5893-a4c8-6d630872661d",
+    "jobTitle": "Marketing Executive",
+    "managerUpn": "chloe.wright@northwind.example",
+    "officeLocation": "Bristol",
+    "upn": "nadia.ali@northwind.example",
+    "userType": "Employee"
+  },
+  {
+    "accountEnabled": true,
+    "authMethods": [
+      "authenticator_app"
+    ],
+    "band": "L3",
+    "country": "GB",
+    "department": "Marketing",
+    "displayName": "Megan Shaw",
+    "employeeId": "NW90036",
+    "fixture": true,
+    "id": "c227709d-566d-5696-b235-36c1d455bb12",
+    "jobTitle": "Marketing Executive",
+    "managerUpn": "chloe.wright@northwind.example",
+    "officeLocation": "Bristol",
+    "upn": "megan.shaw@northwind.example",
+    "userType": "Employee"
+  },
+  {
+    "accountEnabled": true,
+    "authMethods": [
+      "authenticator_app"
+    ],
+    "band": "L7",
+    "country": "GB",
+    "department": "Customer Support",
+    "displayName": "Owen Mackay",
+    "employeeId": "NW90037",
+    "fixture": true,
+    "id": "eb8238c1-a156-5802-bacf-23fca0141135",
+    "jobTitle": "Head of Customer Support",
+    "managerUpn": "amanda.sterling@northwind.example",
+    "officeLocation": "Glasgow",
+    "upn": "owen.mackay@northwind.example",
+    "userType": "Employee"
+  },
+  {
+    "accountEnabled": true,
+    "authMethods": [
+      "authenticator_app",
+      "sspr_registered"
+    ],
+    "band": "L5",
+    "country": "GB",
+    "department": "Customer Support",
+    "displayName": "Daniel Fraser",
+    "employeeId": "NW90038",
+    "fixture": true,
+    "id": "93336e8a-ee5b-5131-8bbf-8b8de4b8da04",
+    "jobTitle": "Customer Support Team Lead",
+    "managerUpn": "owen.mackay@northwind.example",
+    "officeLocation": "Glasgow",
+    "upn": "daniel.fraser@northwind.example",
+    "userType": "Employee"
+  },
+  {
+    "accountEnabled": true,
+    "authMethods": [
+      "authenticator_app"
+    ],
+    "band": "L7",
+    "country": "GB",
+    "department": "Internal Audit",
+    "displayName": "Ruth Adeyemi",
+    "employeeId": "NW90039",
+    "fixture": true,
+    "id": "b1f6a4ac-a87d-539f-8da2-10d1df2aa1b0",
+    "jobTitle": "Director of Internal Audit",
+    "managerUpn": "amanda.sterling@northwind.example",
+    "officeLocation": "London",
+    "upn": "ruth.adeyemi@northwind.example",
+    "userType": "Employee"
+  },
+  {
+    "accountEnabled": true,
+    "authMethods": [
+      "authenticator_app"
+    ],
+    "band": "L6",
+    "country": "GB",
+    "department": "Internal Audit",
+    "displayName": "Patrick Lynch",
+    "employeeId": "NW90040",
+    "fixture": true,
+    "id": "366675b4-0dd7-5d92-af0e-d962e207a112",
+    "jobTitle": "Internal Audit Manager",
+    "managerUpn": "ruth.adeyemi@northwind.example",
+    "officeLocation": "London",
+    "upn": "patrick.lynch@northwind.example",
+    "userType": "Employee"
+  },
+  {
+    "accountEnabled": true,
+    "authMethods": [
+      "authenticator_app"
+    ],
+    "band": "L6",
+    "country": "GB",
+    "department": "Operations",
+    "displayName": "Tracy Holt",
+    "employeeId": "NW90041",
+    "fixture": true,
+    "id": "a2a65694-86b1-50de-862a-9998ca36a0d7",
+    "jobTitle": "Operations Manager",
+    "managerUpn": "amanda.sterling@northwind.example",
+    "officeLocation": "Leeds",
+    "upn": "tracy.holt@northwind.example",
+    "userType": "Employee"
+  },
+  {
+    "accountEnabled": true,
+    "authMethods": [
+      "authenticator_app"
+    ],
+    "band": "L3",
+    "country": "GB",
+    "department": "Operations",
+    "displayName": "Harry Dunn",
+    "employeeId": "NW90042",
+    "fixture": true,
+    "id": "a1c6573d-efda-5ab3-8943-23fb5bc583f2",
+    "jobTitle": "Operations Analyst",
+    "managerUpn": "tracy.holt@northwind.example",
+    "officeLocation": "Leeds",
+    "upn": "harry.dunn@northwind.example",
+    "userType": "Employee"
+  },
+  {
+    "accountEnabled": true,
+    "authMethods": [
+      "authenticator_app"
+    ],
+    "band": "L6",
+    "country": "DE",
+    "department": "Operations",
+    "displayName": "Markus Vogel",
+    "employeeId": "NW90043",
+    "fixture": true,
+    "id": "b15e4b39-3858-51d3-9044-a9b0fcfc53fe",
+    "jobTitle": "Operations Manager",
+    "managerUpn": "amanda.sterling@northwind.example",
+    "officeLocation": "Frankfurt",
+    "upn": "markus.vogel@northwind.example",
+    "userType": "Employee"
+  },
+  {
+    "accountEnabled": true,
+    "authMethods": [
+      "authenticator_app"
+    ],
+    "band": "L4",
+    "country": "DE",
+    "department": "Operations",
+    "displayName": "Lena Schmidt",
+    "employeeId": "NW90044",
+    "fixture": true,
+    "id": "a7450947-4eb2-522b-ae1a-8e34f52106fb",
+    "jobTitle": "Operations Analyst",
+    "managerUpn": "markus.vogel@northwind.example",
+    "officeLocation": "Frankfurt",
+    "upn": "lena.schmidt@northwind.example",
+    "userType": "Employee"
+  },
+  {
+    "accountEnabled": true,
+    "country": "GB",
+    "createdDate": "2026-09-15",
+    "department": "External",
+    "displayName": "Alex Meyer (Contoso Partners)",
+    "expiryDate": "2026-12-14",
+    "fixture": true,
+    "id": "854dfea8-1872-5979-a52a-742ce7b675de",
+    "jobTitle": "External consultant",
+    "mail": "alex.meyer@contoso-partners.example",
+    "managerUpn": null,
+    "officeLocation": "n/a",
+    "sponsorUpn": "raj.patel@northwind.example",
+    "upn": "alex.meyer_contoso-partners.example#EXT#@northwind.example",
+    "userType": "Guest"
+  }
+]

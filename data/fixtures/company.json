@@ -1,0 +1,37 @@
+{
+  "approvedCountries": [
+    "GB",
+    "IE",
+    "DE",
+    "IN",
+    "US",
+    "EU/EEA states"
+  ],
+  "approvedPartnerDomains": [
+    "contoso-partners.example",
+    "fabrikam-consulting.example",
+    "tailspin-logistics.example"
+  ],
+  "classificationLevels": [
+    "Public",
+    "Internal",
+    "Confidential",
+    "Restricted"
+  ],
+  "countries": {
+    "DE": 900,
+    "GB": 7200,
+    "IE": 600,
+    "IN": 2400,
+    "US": 900
+  },
+  "domain": "northwind.example",
+  "headcountTarget": 12000,
+  "name": "Northwind Ltd",
+  "note": "Fictional UK-headquartered multinational. All data is synthetic.",
+  "now": "2026-12-01T09:00:00Z",
+  "tenantSettings": {
+    "anyoneLinksEnabled": false,
+    "guestExpiryDays": 90
+  }
+}

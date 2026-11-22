@@ -1,0 +1,248 @@
+"""Emit the hand-authored fixture files used by the eval cases.
+
+Run: python tools/build_fixtures.py   (writes data/fixtures/*.json)
+Everything is fictional. Emails use the reserved .example top-level domain.
+Synthetic 'now' for the whole dataset is 2026-12-01T09:00:00Z (a Tuesday).
+"""
+import json
+import uuid
+from pathlib import Path
+
+DOMAIN = "northwind.example"
+NS = uuid.UUID("6f1c2d3e-4a5b-4c6d-8e7f-a1b2c3d4e5f6")  # fixed namespace for uuid5 ids
+NOW = "2026-12-01T09:00:00Z"
+
+
+def gid(key: str) -> str:
+    return str(uuid.uuid5(NS, key))
+
+
+# (local, display, title, department, location, country, manager_local, type, band)
+PEOPLE = [
+    ("amanda.sterling", "Amanda Sterling", "Chief Executive Officer", "Executive", "London", "GB", None, "Employee", "L9"),
+    ("david.okafor", "David Okafor", "Chief Financial Officer", "Finance", "London", "GB", "amanda.sterling", "Employee", "L8"),
+    ("rachel.stone", "Rachel Stone", "Executive Assistant", "Finance", "London", "GB", "david.okafor", "Employee", "L4"),
+    ("elena.rossi", "Elena Rossi", "Finance Director", "Finance", "London", "GB", "david.okafor", "Employee", "L7"),
+    ("marcus.bell", "Marcus Bell", "Finance Controller", "Finance", "London", "GB", "elena.rossi", "Employee", "L6"),
+    ("priya.nair", "Priya Nair", "Senior Finance Analyst", "Finance", "London", "GB", "marcus.bell", "Employee", "L5"),
+    ("callum.reid", "Callum Reid", "Finance Analyst", "Finance", "London", "GB", "marcus.bell", "Employee", "L3"),
+    ("helen.cross", "Helen Cross", "Chief Technology Officer", "Engineering", "Birmingham", "GB", "amanda.sterling", "Employee", "L8"),
+    ("raj.patel", "Raj Patel", "Director of Engineering", "Engineering", "Birmingham", "GB", "helen.cross", "Employee", "L7"),
+    ("sarah.whitfield", "Sarah Whitfield", "Engineering Manager", "Engineering", "Birmingham", "GB", "raj.patel", "Employee", "L6"),
+    ("tom.hargreaves", "Tom Hargreaves", "Software Engineer", "Engineering", "Birmingham", "GB", "sarah.whitfield", "Employee", "L4"),
+    ("emily.walsh", "Emily Walsh", "Software Engineer", "Engineering", "Birmingham", "GB", "sarah.whitfield", "Employee", "L3"),
+    ("sam.jordan", "Sam Jordan", "Software Engineer (contractor, Brightpath Staffing)", "Engineering", "Birmingham", "GB", "sarah.whitfield", "Contractor", "C1"),
+    ("ananya.rao", "Ananya Rao", "Engineering Manager", "Engineering", "Pune", "IN", "raj.patel", "Employee", "L6"),
+    ("arjun.mehta", "Arjun Mehta", "Software Engineer", "Engineering", "Pune", "IN", "ananya.rao", "Employee", "L4"),
+    ("victor.lang", "Victor Lang", "Sales Director UK and Ireland", "Sales", "London", "GB", "amanda.sterling", "Employee", "L7"),
+    ("olivia.grant", "Olivia Grant", "Regional Sales Manager", "Sales", "Manchester", "GB", "victor.lang", "Employee", "L6"),
+    ("jamie.collins", "Jamie Collins", "Sales Executive", "Sales", "Manchester", "GB", "olivia.grant", "Employee", "L3"),
+    ("connor.price", "Connor Price", "Sales Executive", "Sales", "Manchester", "GB", "olivia.grant", "Employee", "L3"),
+    ("kevin.doherty", "Kevin Doherty", "Sales Executive", "Sales", "Manchester", "GB", "olivia.grant", "Employee", "L3"),
+    ("noah.bennett", "Noah Bennett", "Sales Executive", "Sales", "Manchester", "GB", "olivia.grant", "Employee", "L3"),
+    ("michael.chen", "Michael Chen", "Sales Director North America", "Sales", "Chicago", "US", "amanda.sterling", "Employee", "L7"),
+    ("hannah.price", "Hannah Price", "People Director", "People", "London", "GB", "amanda.sterling", "Employee", "L7"),
+    ("aisha.khan", "Aisha Khan", "HR Business Partner", "People", "Leeds", "GB", "hannah.price", "Employee", "L5"),
+    ("yasmin.farouk", "Yasmin Farouk", "HR Operations Advisor", "People", "Leeds", "GB", "hannah.price", "Employee", "L4"),
+    ("noor.ahmed", "Noor Ahmed", "Chief Information Security Officer", "IT Services", "London", "GB", "helen.cross", "Employee", "L8"),
+    ("fatima.hussain", "Fatima Hussain", "IT Security Analyst", "IT Services", "Birmingham", "GB", "noor.ahmed", "Employee", "L5"),
+    ("george.mills", "George Mills", "Service Desk Analyst (Level 2)", "IT Services", "Birmingham", "GB", "helen.cross", "Employee", "L4"),
+    ("catherine.doyle", "Catherine Doyle", "General Counsel", "Legal and Compliance", "London", "GB", "amanda.sterling", "Employee", "L8"),
+    ("liam.obrien", "Liam O'Brien", "Legal Counsel", "Legal and Compliance", "London", "GB", "catherine.doyle", "Employee", "L5"),
+    ("victoria.hayes", "Victoria Hayes", "Procurement Director", "Procurement", "London", "GB", "david.okafor", "Employee", "L7"),
+    ("ben.turner", "Ben Turner", "Procurement Specialist", "Procurement", "London", "GB", "victoria.hayes", "Employee", "L4"),
+    ("jessica.long", "Jessica Long", "Marketing Director", "Marketing", "Bristol", "GB", "amanda.sterling", "Employee", "L7"),
+    ("chloe.wright", "Chloe Wright", "Marketing Manager", "Marketing", "Bristol", "GB", "jessica.long", "Employee", "L6"),
+    ("nadia.ali", "Nadia Ali", "Marketing Executive", "Marketing", "Bristol", "GB", "chloe.wright", "Employee", "L3"),
+    ("megan.shaw", "Megan Shaw", "Marketing Executive", "Marketing", "Bristol", "GB", "chloe.wright", "Employee", "L3"),
+    ("owen.mackay", "Owen Mackay", "Head of Customer Support", "Customer Support", "Glasgow", "GB", "amanda.sterling", "Employee", "L7"),
+    ("daniel.fraser", "Daniel Fraser", "Customer Support Team Lead", "Customer Support", "Glasgow", "GB", "owen.mackay", "Employee", "L5"),
+    ("ruth.adeyemi", "Ruth Adeyemi", "Director of Internal Audit", "Internal Audit", "London", "GB", "amanda.sterling", "Employee", "L7"),
+    ("patrick.lynch", "Patrick Lynch", "Internal Audit Manager", "Internal Audit", "London", "GB", "ruth.adeyemi", "Employee", "L6"),
+    ("tracy.holt", "Tracy Holt", "Operations Manager", "Operations", "Leeds", "GB", "amanda.sterling", "Employee", "L6"),
+    ("harry.dunn", "Harry Dunn", "Operations Analyst", "Operations", "Leeds", "GB", "tracy.holt", "Employee", "L3"),
+    ("markus.vogel", "Markus Vogel", "Operations Manager", "Operations", "Frankfurt", "DE", "amanda.sterling", "Employee", "L6"),
+    ("lena.schmidt", "Lena Schmidt", "Operations Analyst", "Operations", "Frankfurt", "DE", "markus.vogel", "Employee", "L4"),
+]
+
+AUTH_METHODS = {
+    "priya.nair": ["authenticator_app (registered on a phone no longer in her possession)"],
+    "daniel.fraser": ["authenticator_app", "sspr_registered"],
+}
+
+# (name, type, classification, owners, members, requestable, description)
+GROUPS = [
+    ("SG-Eng-Platform-Dev", "security", "Internal", ["sarah.whitfield"], ["tom.hargreaves", "sam.jordan", "arjun.mehta"], True, "Platform engineering development access"),
+    ("SG-Eng-Prod-Deploy", "security", "Restricted", ["raj.patel"], ["sarah.whitfield"], True, "Production deployment rights. Requests need a change-board (CAB) reference."),
+    ("SG-Finance-Reporting", "security", "Confidential", ["marcus.bell"], ["priya.nair", "marcus.bell"], True, "Finance reporting data and dashboards"),
+    ("SG-Finance-Payroll", "security", "Restricted", ["elena.rossi"], ["elena.rossi"], True, "Payroll data and processing"),
+    ("SG-Sales-CRM-Users", "security", "Internal", ["olivia.grant"], ["olivia.grant", "kevin.doherty"], True, "Sales CRM user access (UK and Ireland)"),
+    ("SG-HR-Case-Management", "security", "Restricted", ["hannah.price"], ["hannah.price", "yasmin.farouk"], True, "HR case management system"),
+    ("SG-Legal-Matters", "security", "Restricted", ["catherine.doyle"], ["catherine.doyle", "liam.obrien"], True, "Legal matter files"),
+    ("SG-IT-Privileged-Admins", "security", "Privileged", ["noor.ahmed"], ["noor.ahmed"], False, "Privileged administrator group. Not requestable through the Service Desk."),
+    ("SG-IT-SecApprovers", "security", "Restricted", ["noor.ahmed"], ["fatima.hussain", "noor.ahmed"], False, "IT Security approvers for access requests"),
+    ("SG-Audit-ReadOnly", "security", "Confidential", ["ruth.adeyemi"], ["patrick.lynch", "ruth.adeyemi"], True, "Internal Audit read-only evidence access"),
+    ("SG-Procurement-Contracts", "security", "Confidential", ["victoria.hayes"], ["victoria.hayes", "ben.turner"], True, "Supplier contracts"),
+    ("M365-Marketing-Campaigns", "m365", "Internal", ["chloe.wright"], ["chloe.wright", "nadia.ali", "megan.shaw"], True, "Marketing campaigns Team"),
+    ("M365-Project-Atlas", "m365", "Internal", ["raj.patel"], ["raj.patel", "sarah.whitfield", "tom.hargreaves"], True, "Project Atlas Team and site"),
+    ("SG-Atlas-Commercials", "security", "Confidential", ["raj.patel"], ["raj.patel"], True, "Project Atlas commercial terms library"),
+    ("SG-All-Staff-UK", "dynamic", "Internal", [], [], False, "All UK staff (dynamic membership, not requestable)"),
+]
+
+# (name, label, sharing, owners, note)
+SITES = [
+    ("Finance-Restricted", "Restricted", "Disabled", ["elena.rossi"], "Finance restricted documents"),
+    ("Legal-Confidential", "Restricted", "Disabled", ["catherine.doyle"], "Legal matter documents"),
+    ("Engineering-Wiki", "Internal", "ExistingGuests", ["raj.patel"], "Engineering knowledge base"),
+    ("Sales-Enablement", "Internal", "NewAndExistingGuests", ["olivia.grant"], "Sales decks and collateral"),
+    ("HR-Policies", "Internal", "Disabled", ["hannah.price"], "HR policies for all staff"),
+    ("Project-Atlas", "Internal", "NewAndExistingGuests", ["raj.patel"], "Project Atlas site. Library 'Atlas-Commercials' is labelled Confidential."),
+    ("Marketing-Assets", "Internal", "ExistingGuests", ["chloe.wright"], "Marketing assets"),
+    ("Procurement-Contracts", "Confidential", "ExistingGuests", ["victoria.hayes"], "Supplier contracts"),
+]
+
+# (name, owner, platform, extra fields)
+DEVICES = [
+    ("NW-LT-PN01", "priya.nair", "Windows", {"complianceState": "compliant", "managed": "corporate", "osUpdatePendingDays": 3, "encryption": True, "defenderSignatureAgeDays": 1, "lastCheckInDays": 0, "jailbroken": False}),
+    ("NW-LT-TH01", "tom.hargreaves", "Windows", {"complianceState": "noncompliant", "managed": "corporate", "osUpdatePendingDays": 62, "encryption": True, "defenderSignatureAgeDays": 1, "lastCheckInDays": 0, "jailbroken": False, "nonComplianceReasons": ["os_update_overdue"], "firstNonCompliantDate": "2026-11-12", "graceEnds": "2026-11-19"}),
+    ("NW-LT-AM01", "arjun.mehta", "Windows", {"complianceState": "compliant", "managed": "corporate", "osUpdatePendingDays": 5, "encryption": True, "defenderSignatureAgeDays": 2, "lastCheckInDays": 0, "jailbroken": False}),
+    ("NW-LT-JC01", "jamie.collins", "Windows", {"complianceState": "noncompliant", "managed": "corporate", "osUpdatePendingDays": 4, "encryption": False, "defenderSignatureAgeDays": 1, "lastCheckInDays": 0, "jailbroken": False, "nonComplianceReasons": ["encryption_disabled"], "firstNonCompliantDate": "2026-11-26", "graceEnds": "2026-12-03"}),
+    ("NW-MB-OG01", "olivia.grant", "macOS", {"complianceState": "noncompliant", "managed": "corporate", "osUpdatePendingDays": 6, "encryption": True, "defenderSignatureAgeDays": 3, "lastCheckInDays": 52, "jailbroken": False, "nonComplianceReasons": ["no_recent_check_in"], "firstNonCompliantDate": "2026-10-31", "graceEnds": "2026-11-07"}),
+    ("NW-MOB-KD01", "kevin.doherty", "iOS", {"complianceState": "compliant", "managed": "corporate", "osUpdatePendingDays": 0, "encryption": True, "lastCheckInDays": 0, "jailbroken": False}),
+    ("NW-MOB-AK01", "aisha.khan", "Android", {"complianceState": "noncompliant", "managed": "corporate", "osUpdatePendingDays": 10, "encryption": True, "lastCheckInDays": 0, "jailbroken": True, "nonComplianceReasons": ["rooted_device"], "firstNonCompliantDate": "2026-12-01", "graceEnds": None}),
+    ("NW-LT-SJ01", "sam.jordan", "Windows", {"complianceState": "unmanaged", "managed": "agency_owned_not_enrolled", "lastCheckInDays": None, "jailbroken": False, "nonComplianceReasons": ["device_not_enrolled"]}),
+    ("NW-LT-EW01", "emily.walsh", "Windows", {"complianceState": "not_evaluated", "managed": "provisioned_not_yet_enrolled", "lastCheckInDays": None, "jailbroken": False, "shipDate": "2026-12-03"}),
+    ("NW-LT-LS01", "lena.schmidt", "Windows", {"complianceState": "compliant", "managed": "corporate", "osUpdatePendingDays": 2, "encryption": True, "defenderSignatureAgeDays": 1, "lastCheckInDays": 0, "jailbroken": False}),
+    ("NW-LT-RS01", "rachel.stone", "Windows", {"complianceState": "compliant", "managed": "corporate", "osUpdatePendingDays": 1, "encryption": True, "defenderSignatureAgeDays": 1, "lastCheckInDays": 0, "jailbroken": False}),
+    ("NW-LT-DF01", "daniel.fraser", "Windows", {"complianceState": "noncompliant", "managed": "corporate", "osUpdatePendingDays": 2, "encryption": True, "defenderSignatureAgeDays": 12, "lastCheckInDays": 0, "jailbroken": False, "nonComplianceReasons": ["endpoint_protection_signatures_stale"], "firstNonCompliantDate": "2026-11-29", "graceEnds": "2026-12-06"}),
+    ("NW-LT-DO01", "david.okafor", "Windows", {"complianceState": "compliant", "managed": "corporate", "osUpdatePendingDays": 2, "encryption": True, "defenderSignatureAgeDays": 1, "lastCheckInDays": 1, "jailbroken": False, "lastSeen": "2026-11-30T19:40:00Z"}),
+]
+
+SIGNINS = [
+    {"id": "SI-0001", "user": "tom.hargreaves", "time": "2026-12-01T08:41:00Z", "app": "SharePoint Online", "status": "blocked", "errorCode": 53000, "reason": "Blocked by Conditional Access: device is not compliant", "policy": "CA-Require-Compliant-Device", "country": "GB", "city": "Birmingham", "device": "NW-LT-TH01", "mfa": "satisfied"},
+]
+for i, minute in enumerate([30, 34, 38, 43, 47], start=2):
+    SIGNINS.append({"id": f"SI-000{i}", "user": "priya.nair", "time": f"2026-12-01T08:{minute:02d}:00Z", "app": "Microsoft 365 portal", "status": "failure", "errorCode": 500121, "reason": "Authentication failed during strong authentication request", "policy": "CA-Require-MFA", "country": "GB", "city": "London", "device": "NW-LT-PN01", "mfa": "failed (authenticator app on previous phone unreachable)"})
+SIGNINS += [
+    {"id": "SI-0007", "user": "daniel.fraser", "time": "2026-12-01T08:50:00Z", "app": "Microsoft 365 portal", "status": "blocked", "errorCode": 50053, "reason": "Account locked after too many failed sign-in attempts", "policy": "Smart lockout", "country": "GB", "city": "Glasgow", "device": "NW-LT-DF01", "mfa": "not reached", "lockedUntil": "2026-12-01T09:20:00Z", "failedAttempts": 10},
+    {"id": "SI-0008", "user": "sam.jordan", "time": "2026-12-01T08:55:00Z", "app": "Microsoft Teams (desktop)", "status": "blocked", "errorCode": 53000, "reason": "Blocked by Conditional Access: device is not enrolled", "policy": "CA-Contractor-Unmanaged-Browser-Only", "country": "GB", "city": "Birmingham", "device": "NW-LT-SJ01", "mfa": "satisfied"},
+    {"id": "SI-0009", "user": "olivia.grant", "time": "2026-12-01T08:20:00Z", "app": "Outlook (macOS)", "status": "blocked", "errorCode": 53000, "reason": "Blocked by Conditional Access: device has not checked in recently", "policy": "CA-Require-Compliant-Device", "country": "GB", "city": "Manchester", "device": "NW-MB-OG01", "mfa": "satisfied"},
+]
+
+# HR records overriding the default 'active' record
+HR_OVERRIDES = {
+    "emily.walsh": {"status": "joiner", "startDate": "2026-12-07", "trainingComplete": False, "jobFamily": "ENG"},
+    "noah.bennett": {"status": "joiner", "startDate": "2026-12-14", "trainingComplete": False, "jobFamily": "SAL"},
+    "callum.reid": {"status": "active", "startDate": "2026-11-23", "trainingComplete": False, "trainingDueBy": "2026-12-07", "jobFamily": "FIN"},
+    "kevin.doherty": {"status": "leaver", "lastWorkingDay": "2026-12-11", "legalHold": False, "reason": "resignation", "jobFamily": "SAL"},
+    "megan.shaw": {"status": "leaver", "lastWorkingDay": "2026-11-20", "legalHold": False, "accountDisabled": True, "reason": "resignation", "jobFamily": "MKT"},
+    "harry.dunn": {"status": "leaver", "lastWorkingDay": "2026-12-04", "legalHold": True, "reason": "redundancy", "jobFamily": "OPS"},
+}
+
+KNOWN_TICKETS = [
+    {"id": "INC-87950", "subject": "Mailbox quota increase", "status": "closed", "requester": "nadia.ali"},
+    {"id": "INC-88010", "subject": "Teams meeting room display", "status": "closed", "requester": "chloe.wright"},
+    {"id": "INC-88102", "subject": "VPN client update", "status": "open", "requester": "tom.hargreaves"},
+]
+
+COMPANY = {
+    "name": "Northwind Ltd",
+    "domain": DOMAIN,
+    "now": NOW,
+    "headcountTarget": 12000,
+    "note": "Fictional UK-headquartered multinational. All data is synthetic.",
+    "countries": {"GB": 7200, "IN": 2400, "DE": 900, "US": 900, "IE": 600},
+    "approvedCountries": ["GB", "IE", "DE", "IN", "US", "EU/EEA states"],
+    "approvedPartnerDomains": ["contoso-partners.example", "fabrikam-consulting.example", "tailspin-logistics.example"],
+    "tenantSettings": {"anyoneLinksEnabled": False, "guestExpiryDays": 90},
+    "classificationLevels": ["Public", "Internal", "Confidential", "Restricted"],
+}
+
+
+def upn(local: str) -> str:
+    return f"{local}@{DOMAIN}"
+
+
+def main() -> None:
+    out = Path(__file__).resolve().parent.parent / "data" / "fixtures"
+    out.mkdir(parents=True, exist_ok=True)
+    people = []
+    for n, (local, name, title, dept, loc, cc, mgr, typ, band) in enumerate(PEOPLE, start=1):
+        rec = {
+            "id": gid(upn(local)),
+            "upn": upn(local),
+            "displayName": name,
+            "jobTitle": title,
+            "department": dept,
+            "officeLocation": loc,
+            "country": cc,
+            "managerUpn": upn(mgr) if mgr else None,
+            "userType": typ,
+            "band": band,
+            "employeeId": f"NW{90000 + n}",
+            "accountEnabled": True,
+            "authMethods": AUTH_METHODS.get(local, ["authenticator_app"]),
+            "fixture": True,
+        }
+        if typ == "Contractor":
+            rec.update({"sponsorUpn": upn(mgr), "agency": "Brightpath Staffing", "contractEnd": "2027-02-28"})
+        people.append(rec)
+    guest_local = "alex.meyer_contoso-partners.example#EXT#"
+    people.append({
+        "id": gid("guest:alex.meyer@contoso-partners.example"),
+        "upn": f"{guest_local}@{DOMAIN}",
+        "mail": "alex.meyer@contoso-partners.example",
+        "displayName": "Alex Meyer (Contoso Partners)",
+        "jobTitle": "External consultant",
+        "department": "External",
+        "officeLocation": "n/a",
+        "country": "GB",
+        "managerUpn": None,
+        "userType": "Guest",
+        "sponsorUpn": upn("raj.patel"),
+        "createdDate": "2026-09-15",
+        "expiryDate": "2026-12-14",
+        "accountEnabled": True,
+        "fixture": True,
+    })
+    groups = []
+    for name, typ, cls, owners, members, requestable, desc in GROUPS:
+        groups.append({
+            "id": gid("group:" + name), "displayName": name, "groupType": typ, "classification": cls,
+            "owners": [upn(o) for o in owners], "members": [upn(m) for m in members],
+            "requestableViaServiceDesk": requestable, "description": desc, "fixture": True,
+        })
+    sites = []
+    for name, label, sharing, owners, note in SITES:
+        sites.append({
+            "id": gid("site:" + name), "name": name, "sensitivityLabel": label, "externalSharing": sharing,
+            "owners": [upn(o) for o in owners], "description": note, "fixture": True,
+        })
+    devices = []
+    for name, owner, platform, extra in DEVICES:
+        d = {"id": gid("device:" + name), "deviceName": name, "ownerUpn": upn(owner), "platform": platform, "fixture": True}
+        d.update(extra)
+        devices.append(d)
+    signins = []
+    for s in SIGNINS:
+        r = dict(s)
+        r["userUpn"] = upn(r.pop("user"))
+        signins.append(r)
+    hr = {upn(k): v for k, v in HR_OVERRIDES.items()}
+
+    def dump(name: str, obj) -> None:
+        (out / name).write_text(json.dumps(obj, indent=2, sort_keys=True, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
+
+    dump("company.json", COMPANY)
+    dump("people.json", people)
+    dump("groups.json", groups)
+    dump("sites.json", sites)
+    dump("devices.json", devices)
+    dump("signins.json", signins)
+    dump("hr_overrides.json", hr)
+    dump("known_tickets.json", KNOWN_TICKETS)
+    print(f"fixtures: {len(people)} people, {len(groups)} groups, {len(sites)} sites, {len(devices)} devices, {len(signins)} sign-ins, {len(hr)} HR overrides")
+
+
+if __name__ == "__main__":
+    main()

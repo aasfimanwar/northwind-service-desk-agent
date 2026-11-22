@@ -1,0 +1,14 @@
+# generated bulk data: rebuild with `python tools/gen_company.py` (checked against data/MANIFEST.json)
+data/generated/
+# secrets and local state
+.env
+*.key
+# python
+__pycache__/
+.venv/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+# local runs and caches
+runs/
+*.sqlite

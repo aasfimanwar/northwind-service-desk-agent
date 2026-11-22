@@ -1,0 +1,236 @@
+[
+  {
+    "classification": "Internal",
+    "description": "Platform engineering development access",
+    "displayName": "SG-Eng-Platform-Dev",
+    "fixture": true,
+    "groupType": "security",
+    "id": "7c3d5ea0-a56a-58d5-a661-b3f700cf3567",
+    "members": [
+      "tom.hargreaves@northwind.example",
+      "sam.jordan@northwind.example",
+      "arjun.mehta@northwind.example"
+    ],
+    "owners": [
+      "sarah.whitfield@northwind.example"
+    ],
+    "requestableViaServiceDesk": true
+  },
+  {
+    "classification": "Restricted",
+    "description": "Production deployment rights. Requests need a change-board (CAB) reference.",
+    "displayName": "SG-Eng-Prod-Deploy",
+    "fixture": true,
+    "groupType": "security",
+    "id": "2127797e-5cad-504c-994e-5dc4f023f837",
+    "members": [
+      "sarah.whitfield@northwind.example"
+    ],
+    "owners": [
+      "raj.patel@northwind.example"
+    ],
+    "requestableViaServiceDesk": true
+  },
+  {
+    "classification": "Confidential",
+    "description": "Finance reporting data and dashboards",
+    "displayName": "SG-Finance-Reporting",
+    "fixture": true,
+    "groupType": "security",
+    "id": "717b29e7-ce09-540b-a395-06de5471cd7c",
+    "members": [
+      "priya.nair@northwind.example",
+      "marcus.bell@northwind.example"
+    ],
+    "owners": [
+      "marcus.bell@northwind.example"
+    ],
+    "requestableViaServiceDesk": true
+  },
+  {
+    "classification": "Restricted",
+    "description": "Payroll data and processing",
+    "displayName": "SG-Finance-Payroll",
+    "fixture": true,
+    "groupType": "security",
+    "id": "a94cd2ed-b802-5513-aa82-fdba171e5a54",
+    "members": [
+      "elena.rossi@northwind.example"
+    ],
+    "owners": [
+      "elena.rossi@northwind.example"
+    ],
+    "requestableViaServiceDesk": true
+  },
+  {
+    "classification": "Internal",
+    "description": "Sales CRM user access (UK and Ireland)",
+    "displayName": "SG-Sales-CRM-Users",
+    "fixture": true,
+    "groupType": "security",
+    "id": "7b8b4fa7-c834-530d-96f1-6d5c845817dc",
+    "members": [
+      "olivia.grant@northwind.example",
+      "kevin.doherty@northwind.example"
+    ],
+    "owners": [
+      "olivia.grant@northwind.example"
+    ],
+    "requestableViaServiceDesk": true
+  },
+  {
+    "classification": "Restricted",
+    "description": "HR case management system",
+    "displayName": "SG-HR-Case-Management",
+    "fixture": true,
+    "groupType": "security",
+    "id": "16761796-2054-5e6f-b7cb-b1cb5adcb59f",
+    "members": [
+      "hannah.price@northwind.example",
+      "yasmin.farouk@northwind.example"
+    ],
+    "owners": [
+      "hannah.price@northwind.example"
+    ],
+    "requestableViaServiceDesk": true
+  },
+  {
+    "classification": "Restricted",
+    "description": "Legal matter files",
+    "displayName": "SG-Legal-Matters",
+    "fixture": true,
+    "groupType": "security",
+    "id": "9d1ac094-9ae4-5086-a605-73598ff3241f",
+    "members": [
+      "catherine.doyle@northwind.example",
+      "liam.obrien@northwind.example"
+    ],
+    "owners": [
+      "catherine.doyle@northwind.example"
+    ],
+    "requestableViaServiceDesk": true
+  },
+  {
+    "classification": "Privileged",
+    "description": "Privileged administrator group. Not requestable through the Service Desk.",
+    "displayName": "SG-IT-Privileged-Admins",
+    "fixture": true,
+    "groupType": "security",
+    "id": "887c436b-3a39-5dc4-97a1-b9aea69e90f4",
+    "members": [
+      "noor.ahmed@northwind.example"
+    ],
+    "owners": [
+      "noor.ahmed@northwind.example"
+    ],
+    "requestableViaServiceDesk": false
+  },
+  {
+    "classification": "Restricted",
+    "description": "IT Security approvers for access requests",
+    "displayName": "SG-IT-SecApprovers",
+    "fixture": true,
+    "groupType": "security",
+    "id": "8cdf9919-973f-5a59-a886-5a04a3bc91ce",
+    "members": [
+      "fatima.hussain@northwind.example",
+      "noor.ahmed@northwind.example"
+    ],
+    "owners": [
+      "noor.ahmed@northwind.example"
+    ],
+    "requestableViaServiceDesk": false
+  },
+  {
+    "classification": "Confidential",
+    "description": "Internal Audit read-only evidence access",
+    "displayName": "SG-Audit-ReadOnly",
+    "fixture": true,
+    "groupType": "security",
+    "id": "03e226b6-1752-5a60-b00c-7d106f14487b",
+    "members": [
+      "patrick.lynch@northwind.example",
+      "ruth.adeyemi@northwind.example"
+    ],
+    "owners": [
+      "ruth.adeyemi@northwind.example"
+    ],
+    "requestableViaServiceDesk": true
+  },
+  {
+    "classification": "Confidential",
+    "description": "Supplier contracts",
+    "displayName": "SG-Procurement-Contracts",
+    "fixture": true,
+    "groupType": "security",
+    "id": "bf2c23a9-ea86-59db-8e0d-a95dcbe56a18",
+    "members": [
+      "victoria.hayes@northwind.example",
+      "ben.turner@northwind.example"
+    ],
+    "owners": [
+      "victoria.hayes@northwind.example"
+    ],
+    "requestableViaServiceDesk": true
+  },
+  {
+    "classification": "Internal",
+    "description": "Marketing campaigns Team",
+    "displayName": "M365-Marketing-Campaigns",
+    "fixture": true,
+    "groupType": "m365",
+    "id": "1ebfe6ca-0fac-51c7-8430-0c2b1ede0466",
+    "members": [
+      "chloe.wright@northwind.example",
+      "nadia.ali@northwind.example",
+      "megan.shaw@northwind.example"
+    ],
+    "owners": [
+      "chloe.wright@northwind.example"
+    ],
+    "requestableViaServiceDesk": true
+  },
+  {
+    "classification": "Internal",
+    "description": "Project Atlas Team and site",
+    "displayName": "M365-Project-Atlas",
+    "fixture": true,
+    "groupType": "m365",
+    "id": "6dea7250-d88d-5486-8ed0-582c80c21bab",
+    "members": [
+      "raj.patel@northwind.example",
+      "sarah.whitfield@northwind.example",
+      "tom.hargreaves@northwind.example"
+    ],
+    "owners": [
+      "raj.patel@northwind.example"
+    ],
+    "requestableViaServiceDesk": true
+  },
+  {
+    "classification": "Confidential",
+    "description": "Project Atlas commercial terms library",
+    "displayName": "SG-Atlas-Commercials",
+    "fixture": true,
+    "groupType": "security",
+    "id": "8803506f-6e2f-507f-b418-f89c6f8d657a",
+    "members": [
+      "raj.patel@northwind.example"
+    ],
+    "owners": [
+      "raj.patel@northwind.example"
+    ],
+    "requestableViaServiceDesk": true
+  },
+  {
+    "classification": "Internal",
+    "description": "All UK staff (dynamic membership, not requestable)",
+    "displayName": "SG-All-Staff-UK",
+    "fixture": true,
+    "groupType": "dynamic",
+    "id": "56614598-20d9-5b0f-a2fc-d7f4a750dfbc",
+    "members": [],
+    "owners": [],
+    "requestableViaServiceDesk": false
+  }
+]

@@ -1,0 +1,206 @@
+[
+  {
+    "complianceState": "compliant",
+    "defenderSignatureAgeDays": 1,
+    "deviceName": "NW-LT-PN01",
+    "encryption": true,
+    "fixture": true,
+    "id": "bcc49f3a-7b9c-55cf-ad0f-b25e7db483d6",
+    "jailbroken": false,
+    "lastCheckInDays": 0,
+    "managed": "corporate",
+    "osUpdatePendingDays": 3,
+    "ownerUpn": "priya.nair@northwind.example",
+    "platform": "Windows"
+  },
+  {
+    "complianceState": "noncompliant",
+    "defenderSignatureAgeDays": 1,
+    "deviceName": "NW-LT-TH01",
+    "encryption": true,
+    "firstNonCompliantDate": "2026-11-12",
+    "fixture": true,
+    "graceEnds": "2026-11-19",
+    "id": "a261b5d0-69d9-58a5-ad56-476e10797f96",
+    "jailbroken": false,
+    "lastCheckInDays": 0,
+    "managed": "corporate",
+    "nonComplianceReasons": [
+      "os_update_overdue"
+    ],
+    "osUpdatePendingDays": 62,
+    "ownerUpn": "tom.hargreaves@northwind.example",
+    "platform": "Windows"
+  },
+  {
+    "complianceState": "compliant",
+    "defenderSignatureAgeDays": 2,
+    "deviceName": "NW-LT-AM01",
+    "encryption": true,
+    "fixture": true,
+    "id": "b9ebed70-9331-58d0-9790-4739fc5f2b74",
+    "jailbroken": false,
+    "lastCheckInDays": 0,
+    "managed": "corporate",
+    "osUpdatePendingDays": 5,
+    "ownerUpn": "arjun.mehta@northwind.example",
+    "platform": "Windows"
+  },
+  {
+    "complianceState": "noncompliant",
+    "defenderSignatureAgeDays": 1,
+    "deviceName": "NW-LT-JC01",
+    "encryption": false,
+    "firstNonCompliantDate": "2026-11-26",
+    "fixture": true,
+    "graceEnds": "2026-12-03",
+    "id": "fb36f636-9f84-554e-be59-caec47d2d5fe",
+    "jailbroken": false,
+    "lastCheckInDays": 0,
+    "managed": "corporate",
+    "nonComplianceReasons": [
+      "encryption_disabled"
+    ],
+    "osUpdatePendingDays": 4,
+    "ownerUpn": "jamie.collins@northwind.example",
+    "platform": "Windows"
+  },
+  {
+    "complianceState": "noncompliant",
+    "defenderSignatureAgeDays": 3,
+    "deviceName": "NW-MB-OG01",
+    "encryption": true,
+    "firstNonCompliantDate": "2026-10-31",
+    "fixture": true,
+    "graceEnds": "2026-11-07",
+    "id": "5857e484-f395-5b8a-b503-61d53c2f7538",
+    "jailbroken": false,
+    "lastCheckInDays": 52,
+    "managed": "corporate",
+    "nonComplianceReasons": [
+      "no_recent_check_in"
+    ],
+    "osUpdatePendingDays": 6,
+    "ownerUpn": "olivia.grant@northwind.example",
+    "platform": "macOS"
+  },
+  {
+    "complianceState": "compliant",
+    "deviceName": "NW-MOB-KD01",
+    "encryption": true,
+    "fixture": true,
+    "id": "12bc681d-d8e4-5470-9554-e2922b632f0a",
+    "jailbroken": false,
+    "lastCheckInDays": 0,
+    "managed": "corporate",
+    "osUpdatePendingDays": 0,
+    "ownerUpn": "kevin.doherty@northwind.example",
+    "platform": "iOS"
+  },
+  {
+    "complianceState": "noncompliant",
+    "deviceName": "NW-MOB-AK01",
+    "encryption": true,
+    "firstNonCompliantDate": "2026-12-01",
+    "fixture": true,
+    "graceEnds": null,
+    "id": "6135085a-44f0-5224-8e45-d880669331a2",
+    "jailbroken": true,
+    "lastCheckInDays": 0,
+    "managed": "corporate",
+    "nonComplianceReasons": [
+      "rooted_device"
+    ],
+    "osUpdatePendingDays": 10,
+    "ownerUpn": "aisha.khan@northwind.example",
+    "platform": "Android"
+  },
+  {
+    "complianceState": "unmanaged",
+    "deviceName": "NW-LT-SJ01",
+    "fixture": true,
+    "id": "a5021d1e-78c6-5433-83f2-395c32b6a270",
+    "jailbroken": false,
+    "lastCheckInDays": null,
+    "managed": "agency_owned_not_enrolled",
+    "nonComplianceReasons": [
+      "device_not_enrolled"
+    ],
+    "ownerUpn": "sam.jordan@northwind.example",
+    "platform": "Windows"
+  },
+  {
+    "complianceState": "not_evaluated",
+    "deviceName": "NW-LT-EW01",
+    "fixture": true,
+    "id": "d54bf8aa-bc4e-50d0-bad7-891f11337211",
+    "jailbroken": false,
+    "lastCheckInDays": null,
+    "managed": "provisioned_not_yet_enrolled",
+    "ownerUpn": "emily.walsh@northwind.example",
+    "platform": "Windows",
+    "shipDate": "2026-12-03"
+  },
+  {
+    "complianceState": "compliant",
+    "defenderSignatureAgeDays": 1,
+    "deviceName": "NW-LT-LS01",
+    "encryption": true,
+    "fixture": true,
+    "id": "7649a129-67b4-5631-a217-a0bdf3094eca",
+    "jailbroken": false,
+    "lastCheckInDays": 0,
+    "managed": "corporate",
+    "osUpdatePendingDays": 2,
+    "ownerUpn": "lena.schmidt@northwind.example",
+    "platform": "Windows"
+  },
+  {
+    "complianceState": "compliant",
+    "defenderSignatureAgeDays": 1,
+    "deviceName": "NW-LT-RS01",
+    "encryption": true,
+    "fixture": true,
+    "id": "62aaa200-198e-50e6-bf0e-f116dbea91ea",
+    "jailbroken": false,
+    "lastCheckInDays": 0,
+    "managed": "corporate",
+    "osUpdatePendingDays": 1,
+    "ownerUpn": "rachel.stone@northwind.example",
+    "platform": "Windows"
+  },
+  {
+    "complianceState": "noncompliant",
+    "defenderSignatureAgeDays": 12,
+    "deviceName": "NW-LT-DF01",
+    "encryption": true,
+    "firstNonCompliantDate": "2026-11-29",
+    "fixture": true,
+    "graceEnds": "2026-12-06",
+    "id": "59926e79-53cc-5ef6-a3f1-1be647ab159a",
+    "jailbroken": false,
+    "lastCheckInDays": 0,
+    "managed": "corporate",
+    "nonComplianceReasons": [
+      "endpoint_protection_signatures_stale"
+    ],
+    "osUpdatePendingDays": 2,
+    "ownerUpn": "daniel.fraser@northwind.example",
+    "platform": "Windows"
+  },
+  {
+    "complianceState": "compliant",
+    "defenderSignatureAgeDays": 1,
+    "deviceName": "NW-LT-DO01",
+    "encryption": true,
+    "fixture": true,
+    "id": "f1dc1694-1ff6-51b1-9cd5-7afc0dfeaae9",
+    "jailbroken": false,
+    "lastCheckInDays": 1,
+    "lastSeen": "2026-11-30T19:40:00Z",
+    "managed": "corporate",
+    "osUpdatePendingDays": 2,
+    "ownerUpn": "david.okafor@northwind.example",
+    "platform": "Windows"
+  }
+]

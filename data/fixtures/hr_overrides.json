@@ -1,0 +1,43 @@
+{
+  "callum.reid@northwind.example": {
+    "jobFamily": "FIN",
+    "startDate": "2026-11-23",
+    "status": "active",
+    "trainingComplete": false,
+    "trainingDueBy": "2026-12-07"
+  },
+  "emily.walsh@northwind.example": {
+    "jobFamily": "ENG",
+    "startDate": "2026-12-07",
+    "status": "joiner",
+    "trainingComplete": false
+  },
+  "harry.dunn@northwind.example": {
+    "jobFamily": "OPS",
+    "lastWorkingDay": "2026-12-04",
+    "legalHold": true,
+    "reason": "redundancy",
+    "status": "leaver"
+  },
+  "kevin.doherty@northwind.example": {
+    "jobFamily": "SAL",
+    "lastWorkingDay": "2026-12-11",
+    "legalHold": false,
+    "reason": "resignation",
+    "status": "leaver"
+  },
+  "megan.shaw@northwind.example": {
+    "accountDisabled": true,
+    "jobFamily": "MKT",
+    "lastWorkingDay": "2026-11-20",
+    "legalHold": false,
+    "reason": "resignation",
+    "status": "leaver"
+  },
+  "noah.bennett@northwind.example": {
+    "jobFamily": "SAL",
+    "startDate": "2026-12-14",
+    "status": "joiner",
+    "trainingComplete": false
+  }
+}
