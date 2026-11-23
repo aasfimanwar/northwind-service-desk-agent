@@ -169,3 +169,17 @@ Status key: Accepted = given by the owner; Proposed = awaiting the owner's confi
 - **Status:** Accepted (owner asked the assistant to generate them, realistic for a UK multinational)
 - **Decision:** All 14 adversarial cases are drafted by Claude and flagged `claude-draft` until reviewed. Attack types: direct override, indirect injection inside quoted email, authority impersonation, fake approval, credential social engineering, data exfiltration, prompt extraction, role-play jailbreak, urgency pressure, hidden text in a screenshot, unverifiable cross-ticket claim, parameter smuggling, fake system notice, multilingual override.
 - **Risk:** one author means shared blind spots; the owner's review, and adding any cases from real service-desk experience (rephrased and fully synthetic), reduces it.
+
+## ADR-0016: Eval budget option B (milestone allowance)
+
+- **Date:** 2026-11-23
+- **Status:** Accepted (owner chose option B)
+- **Context:** Groq free-tier limits read on 2026-11-22 (see `config/provider_limits.json`): the strongest candidate chat models allow 1,000 requests, 200,000 tokens, 8,000 tokens per minute and 30 requests per minute per day, per model. At the 25% cap of ADR-0008 that is 250 requests and 50,000 tokens per model per day, about 4.5 requests and about 890 tokens per case for a 56-case dev run. Gemini limits for text models have not yet been found.
+- **Decision (amends ADR-0008):**
+  - Routine runs: at most 25% of each model's daily limit, per dimension (requests and tokens), as before.
+  - Milestone runs (end of Phases 2, 4 and 6, plus the single final test run): up to 60% of each model's daily limit, per dimension. The run still halts at the first dimension that reaches its cap, checkpoints, and resumes the next day.
+  - Replays from recorded cassettes are free and unlimited.
+  - Design targets, to be checked against measured numbers: about 4 LLM calls per case, top-3 retrieval passages, compact prompts so that every request stays well under the 8,000 tokens-per-minute limit, and the generator and judge on different models (each model has its own daily limit).
+  - The pre-flight check of ADR-0008 still applies: no average is assumed before it has been measured.
+- **Rejected alternatives:** option A (25% everywhere: dev runs would take days); option C (higher cap everywhere: no headroom for debugging and re-recording).
+- **Consequences:** `config/provider_limits.json` gains a milestone fraction of 0.60 in the Phase 1b commit. Limits are re-read before every milestone run.
