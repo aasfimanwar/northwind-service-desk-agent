@@ -183,3 +183,28 @@ Status key: Accepted = given by the owner; Proposed = awaiting the owner's confi
   - The pre-flight check of ADR-0008 still applies: no average is assumed before it has been measured.
 - **Rejected alternatives:** option A (25% everywhere: dev runs would take days); option C (higher cap everywhere: no headroom for debugging and re-recording).
 - **Consequences:** `config/provider_limits.json` gains a milestone fraction of 0.60 in the Phase 1b commit. Limits are re-read before every milestone run.
+
+## ADR-0017: Model roles for generator, development and judge
+
+- **Date:** 2026-11-23
+- **Status:** Accepted (owner accepted the recommendation)
+- **Context:** Free-tier limits read on 2026-11-22 (Groq) and 2026-11-23 (Gemini) are recorded in `config/provider_limits.json`. Among Gemini text models only Gemini 3.5 Flash Lite and Gemini 3.1 Flash Lite offer a useful daily quota (500 requests); the other free-tier text models allow 20 requests a day, and several are not available on the free tier at all. Gemma 4 has a very large quota but its tool-calling support is unverified.
+- **Decision:**
+  - Eval generator: Gemini 3.5 Flash Lite.
+  - Development and debugging generator: Gemini 3.1 Flash Lite, which has its own 500-request daily quota, so debugging does not use the eval model's quota.
+  - Judge: `qwen/qwen3.8-27b` on Groq (a different model family from the generator). `openai/gpt-oss-120b` on Groq is the alternative.
+  - Gemma 4 is not used for now; it is checked in the Phase 1b spike and can be reconsidered if Flash Lite proves too weak.
+  - No API embeddings (ADR-0003).
+  - Roles are pinned per run, provider failover is off during eval runs, and roles are recorded in run metadata (ADR-0006). API model IDs are confirmed in the spike; the limits file uses display names.
+- **Rejected alternatives:** the 20-request-a-day Gemini models as generator (5 requests a day at the 25% cap); Gemma 4 as generator before its tool support is verified; a Gemini model as judge (same family as the generator).
+- **Consequences:** every Gemini request budget is a requests-per-day budget, because no daily token limit is shown. Judge and generator quotas are separate.
+
+## ADR-0018: Tooling scaffold and a temporary mypy scope
+
+- **Date:** 2026-11-23
+- **Status:** Accepted (assistant's proposal within the brief; owner reviews at the Phase 1b stop)
+- **Decision:** A uv project that is not built as a package (`package = false`), Python 3.12 only. Dev tools: ruff (with the S security rules), mypy in strict mode, pytest, pre-commit. Pre-commit runs gitleaks, ruff, basic file hygiene and mypy; hook versions are pinned to commit hashes with `pre-commit autoupdate --freeze`. CI installs uv with pip (as the brief requires), then runs lint, format check, strict type check and tests, plus a separate gitleaks scan of the full history. GitHub Actions are pinned to major-version tags for now.
+- **Temporary exception:** mypy strict currently covers `src/` and `tests/` only. The one-off build scripts in `tools/` are not yet fully typed. They are brought under strict mypy in the next Phase 1b step, once the real error list is known.
+- **Rejected alternatives:** blanket `ignore_errors` for `tools/` (hides problems); pinning GitHub Actions to commit hashes now (cannot be verified from this sandbox; planned as a hardening step).
+- **Risks:** the gitleaks pre-commit hook builds from source and may need a Go toolchain on Windows; fallback is the gitleaks binary with a local hook. Pinned versions in the first config are placeholders until `autoupdate --freeze` is run.
+- **Amendment (2026-11-23):** after the first ruff run, rule SIM905 (prefer list literals over `str.split`) is ignored for `tools/` only. The generator keeps its long name lists as compact word strings on purpose; converting them would add hundreds of lines for no benefit. The two other findings (an enumerate counter and an unused loop variable) were fixed in code, and the regenerated manifest is byte-identical.

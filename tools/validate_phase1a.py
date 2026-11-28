@@ -6,6 +6,7 @@ Checks: policy section IDs, fixture integrity, generated data integrity (unique 
 manager chains, no cycles, 12,000 staff), case references (requesters, citations,
 approvers, tools, teams, groups, sites, devices) and category / calibration counts.
 """
+
 import json
 import re
 import sys
@@ -24,16 +25,68 @@ def load_jsonl(p: Path):
     return [json.loads(line) for line in p.read_text(encoding="utf-8").splitlines() if line.strip()]
 
 
-READ_TOOLS = {"lookup_user", "get_manager_chain", "lookup_group", "get_group_owners", "list_group_members", "lookup_site", "get_site_sharing",
-              "get_device_compliance", "get_signin_events", "get_hr_record", "get_ticket", "search_policies"}
-PROPOSE_TOOLS = {"request_group_add", "request_guest_invite", "request_guest_renewal", "request_external_share", "request_leaver_onedrive_access",
-                 "start_onboarding_checklist", "start_offboarding_checklist"}
+READ_TOOLS = {
+    "lookup_user",
+    "get_manager_chain",
+    "lookup_group",
+    "get_group_owners",
+    "list_group_members",
+    "lookup_site",
+    "get_site_sharing",
+    "get_device_compliance",
+    "get_signin_events",
+    "get_hr_record",
+    "get_ticket",
+    "search_policies",
+}
+PROPOSE_TOOLS = {
+    "request_group_add",
+    "request_guest_invite",
+    "request_guest_renewal",
+    "request_external_share",
+    "request_leaver_onedrive_access",
+    "start_onboarding_checklist",
+    "start_offboarding_checklist",
+}
 ESCALATE = {"escalate"}
-NEVER_EXPOSED = {"execute_approved_request", "reset_mfa", "issue_tap", "reset_password", "remote_wipe", "disable_account", "set_site_sharing", "relabel_content",
-                 "delete_mailbox", "delete_onedrive", "delete_ticket"}
-TEAMS = {"it_security", "security_operations", "service_desk_l2", "endpoint_engineering", "people_team", "legal", "policy_office"}
-OUTCOMES = {"resolve", "escalate", "refuse", "ask_clarification", "not_enough_evidence", "out_of_scope"}
-CATEGORIES = {"answerable_policy": 22, "access_request": 14, "unauthorised_request": 12, "ambiguous": 10, "adversarial_ticket": 14, "out_of_scope": 8}
+NEVER_EXPOSED = {
+    "execute_approved_request",
+    "reset_mfa",
+    "issue_tap",
+    "reset_password",
+    "remote_wipe",
+    "disable_account",
+    "set_site_sharing",
+    "relabel_content",
+    "delete_mailbox",
+    "delete_onedrive",
+    "delete_ticket",
+}
+TEAMS = {
+    "it_security",
+    "security_operations",
+    "service_desk_l2",
+    "endpoint_engineering",
+    "people_team",
+    "legal",
+    "policy_office",
+}
+OUTCOMES = {
+    "resolve",
+    "escalate",
+    "refuse",
+    "ask_clarification",
+    "not_enough_evidence",
+    "out_of_scope",
+}
+CATEGORIES = {
+    "answerable_policy": 22,
+    "access_request": 14,
+    "unauthorised_request": 12,
+    "ambiguous": 10,
+    "adversarial_ticket": 14,
+    "out_of_scope": 8,
+}
 ROLES = {"role:it_security_approver"}
 
 
@@ -45,7 +98,9 @@ def main() -> int:
             if m.group(1) in sections:
                 err(f"duplicate policy section {m.group(1)}")
             sections.add(m.group(1))
-    print(f"policy documents: {len(list((ROOT / 'policies').glob('POL-*.md')))}, sections: {len(sections)}")
+    print(
+        f"policy documents: {len(list((ROOT / 'policies').glob('POL-*.md')))}, sections: {len(sections)}"
+    )
 
     # --- fixtures
     fx = ROOT / "data" / "fixtures"
@@ -85,7 +140,9 @@ def main() -> int:
     for u in hr:
         if u not in upns:
             err(f"HR override for unknown user {u}")
-    print(f"fixtures: {len(people)} people, {len(groups)} groups, {len(sites)} sites, {len(devices)} devices, {len(signins)} sign-ins, {len(hr)} HR overrides")
+    print(
+        f"fixtures: {len(people)} people, {len(groups)} groups, {len(sites)} sites, {len(devices)} devices, {len(signins)} sign-ins, {len(hr)} HR overrides"
+    )
 
     # --- generated
     gen = ROOT / "data" / "generated"
@@ -151,7 +208,9 @@ def main() -> int:
                     err(f"site owner unknown {o}")
         if len(ghr) != len(users):
             err("HR record count mismatch")
-        print(f"generated: {len(users)} users, {len(gdevs)} devices, {len(ggroups)} groups, {len(gmem)} memberships, {len(gsites)} sites; total staff {len(staff)}; max manager depth {depth_max}")
+        print(
+            f"generated: {len(users)} users, {len(gdevs)} devices, {len(ggroups)} groups, {len(gmem)} memberships, {len(gsites)} sites; total staff {len(staff)}; max manager depth {depth_max}"
+        )
 
     # --- cases
     cases = load_jsonl(ROOT / "eval" / "cases" / "cases.jsonl")
@@ -183,7 +242,11 @@ def main() -> int:
         for a in c["required_approvers"]:
             if a not in upns and a not in ROLES:
                 err(f"{cid}: unknown approver {a}")
-        for t in c["required_tool_calls"] + c["allowed_tool_calls"] + [x for x in c["forbidden_tool_calls"] if isinstance(x, dict)]:
+        for t in (
+            c["required_tool_calls"]
+            + c["allowed_tool_calls"]
+            + [x for x in c["forbidden_tool_calls"] if isinstance(x, dict)]
+        ):
             if t["tool"] not in all_tool_names:
                 err(f"{cid}: unknown tool {t['tool']}")
             args = t.get("args", {})
@@ -208,12 +271,24 @@ def main() -> int:
             err(f"{cid}: adversarial case without injection field")
         if c["category"] != "adversarial_ticket" and c["injection"]:
             err(f"{cid}: non-adversarial case with injection field")
-        if c["expected_outcome"] == "resolve" and c["category"] == "access_request" and not c["required_tool_calls"]:
+        if (
+            c["expected_outcome"] == "resolve"
+            and c["category"] == "access_request"
+            and not c["required_tool_calls"]
+        ):
             err(f"{cid}: resolve access request without a required tool call")
-        if c["required_tool_calls"] and any(t["tool"] in PROPOSE_TOOLS for t in c["required_tool_calls"]) and not c["required_approvers"]:
+        if (
+            c["required_tool_calls"]
+            and any(t["tool"] in PROPOSE_TOOLS for t in c["required_tool_calls"])
+            and not c["required_approvers"]
+        ):
             err(f"{cid}: propose tool without required approvers")
-    print(f"cases: {len(cases)}  by category: {dict(cat_counts)}  calibration: {len(cal)} {dict(Counter(c['category'] for c in cal))}")
-    print(f"cases citing policy sections: {sum(1 for c in cases if c['required_citations'])}; distinct sections cited: {len({s for c in cases for s in c['required_citations']})}")
+    print(
+        f"cases: {len(cases)}  by category: {dict(cat_counts)}  calibration: {len(cal)} {dict(Counter(c['category'] for c in cal))}"
+    )
+    print(
+        f"cases citing policy sections: {sum(1 for c in cases if c['required_citations'])}; distinct sections cited: {len({s for c in cases for s in c['required_citations']})}"
+    )
 
     if errors:
         print(f"\nFAILED: {len(errors)} problem(s)")

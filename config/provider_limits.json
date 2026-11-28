@@ -1,35 +1,160 @@
 {
-  "read_date": "2026-11-22",
+  "read_date": "Groq 2026-11-22; Gemini 2026-11-23 (pasted by owner)",
   "read_by": "owner, from provider consoles (free plan, no card)",
   "note": "Values are as displayed in the consoles (rounded: 1K = 1,000). Re-read before each milestone run; limits change. The budget rule in DECISIONS.md ADR-0008 uses these numbers.",
   "budget_rule": {
-    "max_fraction_of_daily_limit_per_run": 0.25,
-    "dimensions": ["requests_per_day", "tokens_per_day"]
+    "routine_fraction_of_daily_limit_per_run": 0.25,
+    "milestone_fraction_of_daily_limit_per_run": 0.6,
+    "milestone_runs": [
+      "end of Phase 2",
+      "end of Phase 4",
+      "end of Phase 6",
+      "final test run"
+    ],
+    "dimensions": [
+      "requests_per_day",
+      "tokens_per_day (only where the provider shows a daily token limit)"
+    ],
+    "adr": "ADR-0008 as amended by ADR-0016"
   },
   "providers": {
     "groq": {
       "plan": "free",
       "source": "console.groq.com Organization Limits page, screenshot 2026-11-22",
       "chat_models": {
-        "allam-2-7b": {"rpm": 30, "rpd": 7000, "tpm": 6000, "tpd": 500000},
-        "meta-llama/llama-prompt-guard-2-22m": {"rpm": 30, "rpd": 14400, "tpm": 15000, "tpd": 500000},
-        "meta-llama/llama-prompt-guard-2-86m": {"rpm": 30, "rpd": 14400, "tpm": 15000, "tpd": 500000},
-        "openai/gpt-oss-120b": {"rpm": 30, "rpd": 1000, "tpm": 8000, "tpd": 200000},
-        "openai/gpt-oss-20b": {"rpm": 30, "rpd": 1000, "tpm": 8000, "tpd": 200000},
-        "openai/gpt-oss-safeguard-20b": {"rpm": 3, "rpd": 1000, "tpm": 2000, "tpd": 200000},
-        "qwen/qwen3.8-27b": {"rpm": 30, "rpd": 1000, "tpm": 8000, "tpd": 200000}
+        "allam-2-7b": {
+          "rpm": 30,
+          "rpd": 7000,
+          "tpm": 6000,
+          "tpd": 500000
+        },
+        "meta-llama/llama-prompt-guard-2-22m": {
+          "rpm": 30,
+          "rpd": 14400,
+          "tpm": 15000,
+          "tpd": 500000
+        },
+        "meta-llama/llama-prompt-guard-2-86m": {
+          "rpm": 30,
+          "rpd": 14400,
+          "tpm": 15000,
+          "tpd": 500000
+        },
+        "openai/gpt-oss-120b": {
+          "rpm": 30,
+          "rpd": 1000,
+          "tpm": 8000,
+          "tpd": 200000
+        },
+        "openai/gpt-oss-20b": {
+          "rpm": 30,
+          "rpd": 1000,
+          "tpm": 8000,
+          "tpd": 200000
+        },
+        "openai/gpt-oss-safeguard-20b": {
+          "rpm": 3,
+          "rpd": 1000,
+          "tpm": 2000,
+          "tpd": 200000
+        },
+        "qwen/qwen3.8-27b": {
+          "rpm": 30,
+          "rpd": 1000,
+          "tpm": 8000,
+          "tpd": 200000
+        }
       }
     },
     "gemini": {
       "plan": "free",
-      "source": "Google AI Studio rate-limit view, project 'Default Gemini Project', 28-day window, 2026-11-22",
-      "status": "INCOMPLETE: no text-generation model was listed; do not budget against Gemini yet",
-      "observed": {
-        "Antigravity (category: Agents)": {"rpm": 60, "tpm": 100000, "rpd": 100},
-        "Search grounding (category: Tools)": "limit not displayed",
-        "Map grounding (category: Tools)": "limit not displayed",
-        "Deep Research Pro Preview": "no data available"
-      }
+      "source": "Google AI Studio rate-limit view, project 'Default Gemini Project', free tier, 2026-11-23",
+      "note": "Model names are display names; API model IDs are not confirmed yet. A limit of 0 means the model is not available on the free tier. No daily token limit is displayed for any model, so only requests per day can bind (plus per-minute limits).",
+      "text_out_models_available": {
+        "Gemini 2.5 Flash": {
+          "rpm": 5,
+          "tpm": 250000,
+          "rpd": 20
+        },
+        "Gemini 2.5 Flash Lite": {
+          "rpm": 10,
+          "tpm": 250000,
+          "rpd": 20
+        },
+        "Gemini 3 Flash": {
+          "rpm": 5,
+          "tpm": 250000,
+          "rpd": 20
+        },
+        "Gemini 3.1 Flash Lite": {
+          "rpm": 15,
+          "tpm": 250000,
+          "rpd": 500
+        },
+        "Gemini 3.6 Flash": {
+          "rpm": 5,
+          "tpm": 250000,
+          "rpd": 20
+        },
+        "Gemini 3.5 Flash Lite": {
+          "rpm": 15,
+          "tpm": 250000,
+          "rpd": 500
+        },
+        "Gemini 3.8 Flash": {
+          "rpm": 5,
+          "tpm": 250000,
+          "rpd": 20
+        },
+        "Gemini 4 Hydrogen": {
+          "rpm": 5,
+          "tpm": 250000,
+          "rpd": 20
+        }
+      },
+      "text_out_models_zero_on_free_tier": [
+        "Gemini 2 Flash",
+        "Gemini 2 Flash Lite",
+        "Gemini 2.5 Pro",
+        "Gemini 3.1 Pro",
+        "Gemini 4 Argon",
+        "Gemini 4 Carbon",
+        "Gemini 4 Neon"
+      ],
+      "other_models": {
+        "Gemma 4 26B": {
+          "rpm": 30,
+          "tpm": 16000,
+          "rpd": 14400
+        },
+        "Gemma 4 31B": {
+          "rpm": 30,
+          "tpm": 16000,
+          "rpd": 14400
+        },
+        "Gemini Embedding 1": {
+          "rpm": 100,
+          "tpm": 30000,
+          "rpd": 1000
+        },
+        "Gemini Embedding 2": {
+          "rpm": 100,
+          "tpm": 30000,
+          "rpd": 1000
+        },
+        "Gemini Robotics ER 2 Preview": {
+          "rpm": 5,
+          "tpm": 250000,
+          "rpd": 20
+        }
+      },
+      "not_evaluated": [
+        "Live API models",
+        "Multi-modal generative (image, audio, video) models",
+        "Decisions API",
+        "Agents (Antigravity)",
+        "Tool grounding limits"
+      ]
     }
   }
 }

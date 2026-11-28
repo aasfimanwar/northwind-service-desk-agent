@@ -10,6 +10,7 @@ Design notes
   reference those. This script only creates the bulk population around them.
 - Total headcount target is read from data/fixtures/company.json (12,000 staff).
 """
+
 import hashlib
 import json
 import unicodedata
@@ -38,7 +39,7 @@ class DRand:
             self.buf = hashlib.sha256(self.seed + self.counter.to_bytes(8, "big")).digest()
             self.counter += 1
             self.pos = 0
-        v = int.from_bytes(self.buf[self.pos:self.pos + 4], "big")
+        v = int.from_bytes(self.buf[self.pos : self.pos + 4], "big")
         self.pos += 4
         return v
 
@@ -91,7 +92,14 @@ NAMES = {
 }
 
 LOCATIONS = {
-    "GB": [("London", 30), ("Birmingham", 20), ("Manchester", 15), ("Leeds", 12), ("Bristol", 10), ("Glasgow", 13)],
+    "GB": [
+        ("London", 30),
+        ("Birmingham", 20),
+        ("Manchester", 15),
+        ("Leeds", 12),
+        ("Bristol", 10),
+        ("Glasgow", 13),
+    ],
     "IN": [("Pune", 60), ("Bengaluru", 40)],
     "DE": [("Frankfurt", 60), ("Munich", 40)],
     "US": [("Chicago", 55), ("Austin", 45)],
@@ -99,18 +107,53 @@ LOCATIONS = {
 }
 
 DEPARTMENTS = [
-    ("Engineering", 28), ("Customer Support", 14), ("Sales", 14), ("Operations", 12), ("Finance", 7),
-    ("IT Services", 6), ("Marketing", 5), ("People", 4), ("Legal and Compliance", 3), ("Procurement", 3),
-    ("Product", 3), ("Internal Audit", 1),
+    ("Engineering", 28),
+    ("Customer Support", 14),
+    ("Sales", 14),
+    ("Operations", 12),
+    ("Finance", 7),
+    ("IT Services", 6),
+    ("Marketing", 5),
+    ("People", 4),
+    ("Legal and Compliance", 3),
+    ("Procurement", 3),
+    ("Product", 3),
+    ("Internal Audit", 1),
 ]
 
 TITLES = {
-    "Engineering": ["Software Engineer", "Senior Software Engineer", "QA Engineer", "DevOps Engineer", "Data Engineer"],
+    "Engineering": [
+        "Software Engineer",
+        "Senior Software Engineer",
+        "QA Engineer",
+        "DevOps Engineer",
+        "Data Engineer",
+    ],
     "Customer Support": ["Support Agent", "Senior Support Agent", "Support Specialist"],
-    "Sales": ["Sales Executive", "Account Executive", "Sales Operations Analyst", "Business Development Rep"],
-    "Operations": ["Operations Analyst", "Logistics Coordinator", "Process Analyst", "Operations Coordinator"],
-    "Finance": ["Finance Analyst", "Accounts Payable Clerk", "Financial Accountant", "Payroll Specialist"],
-    "IT Services": ["Service Desk Analyst", "Systems Engineer", "Network Engineer", "IT Support Technician"],
+    "Sales": [
+        "Sales Executive",
+        "Account Executive",
+        "Sales Operations Analyst",
+        "Business Development Rep",
+    ],
+    "Operations": [
+        "Operations Analyst",
+        "Logistics Coordinator",
+        "Process Analyst",
+        "Operations Coordinator",
+    ],
+    "Finance": [
+        "Finance Analyst",
+        "Accounts Payable Clerk",
+        "Financial Accountant",
+        "Payroll Specialist",
+    ],
+    "IT Services": [
+        "Service Desk Analyst",
+        "Systems Engineer",
+        "Network Engineer",
+        "IT Support Technician",
+    ],
     "Marketing": ["Marketing Executive", "Content Designer", "Digital Marketing Specialist"],
     "People": ["HR Advisor", "Talent Partner", "Learning Specialist"],
     "Legal and Compliance": ["Compliance Analyst", "Paralegal", "Legal Counsel"],
@@ -162,14 +205,16 @@ def main() -> None:
                 local = f"{base}{k}"
             upn = f"{local}@{DOMAIN}"
             used_upns.add(upn)
-            users.append({
-                "_cc": cc,
-                "upn": upn,
-                "displayName": f"{first} {last}",
-                "country": cc,
-                "department": rnd.weighted(DEPARTMENTS),
-                "officeLocation": rnd.weighted(LOCATIONS[cc]),
-            })
+            users.append(
+                {
+                    "_cc": cc,
+                    "upn": upn,
+                    "displayName": f"{first} {last}",
+                    "country": cc,
+                    "department": rnd.weighted(DEPARTMENTS),
+                    "officeLocation": rnd.weighted(LOCATIONS[cc]),
+                }
+            )
 
     # buckets by (department, country) for the management layers
     buckets: dict[tuple, list] = {}
@@ -183,7 +228,6 @@ def main() -> None:
             heads[dept] = gb[0]
 
     ceo = "amanda.sterling@" + DOMAIN
-    n_user = 0
     for key in sorted(buckets):
         dept, cc = key
         b = buckets[key]
@@ -205,8 +249,7 @@ def main() -> None:
             u["managerUpn"] = mgr_upn
 
     out_users = []
-    for u in users:
-        n_user += 1
+    for n_user, u in enumerate(users, start=1):
         node = u["_node"]
         titles = TITLES[u["department"]]
         if node == "head":
@@ -237,22 +280,53 @@ def main() -> None:
         }
         if contractor:
             rec["sponsorUpn"] = u["managerUpn"]
-            rec["agency"] = rnd.choice(["Brightpath Staffing", "Keystone Resourcing", "Larkfield Talent"])
-            rec["contractEnd"] = f"{now_year + 1}-{rnd.choice(['01', '02', '03', '04', '05'])}-{rnd.choice(['15', '28'])}"
+            rec["agency"] = rnd.choice(
+                ["Brightpath Staffing", "Keystone Resourcing", "Larkfield Talent"]
+            )
+            rec["contractEnd"] = (
+                f"{now_year + 1}-{rnd.choice(['01', '02', '03', '04', '05'])}-{rnd.choice(['15', '28'])}"
+            )
         out_users.append(rec)
 
     # devices
     devices = []
-    comp_w = [("compliant", 9300), ("os_update_overdue", 250), ("encryption_disabled", 120), ("no_recent_check_in", 180), ("endpoint_protection_signatures_stale", 100)]
+    comp_w = [
+        ("compliant", 9300),
+        ("os_update_overdue", 250),
+        ("encryption_disabled", 120),
+        ("no_recent_check_in", 180),
+        ("endpoint_protection_signatures_stale", 100),
+    ]
     for rec in out_users:
         mac = rec["department"] in ("Marketing", "Product", "Engineering") and rnd.below(100) < 35
         plat = "macOS" if mac else "Windows"
         name = f"NW-{'MB' if mac else 'LT'}-{rec['employeeId']}"
-        managed = "agency_owned_not_enrolled" if rec["userType"] == "Contractor" and rnd.below(100) < 40 else "corporate"
-        d = {"id": gid("device:" + name), "deviceName": name, "ownerUpn": rec["upn"], "platform": plat, "fixture": False, "managed": managed,
-             "osUpdatePendingDays": rnd.below(10), "encryption": True, "defenderSignatureAgeDays": rnd.below(4), "lastCheckInDays": rnd.below(3), "jailbroken": False}
+        managed = (
+            "agency_owned_not_enrolled"
+            if rec["userType"] == "Contractor" and rnd.below(100) < 40
+            else "corporate"
+        )
+        d = {
+            "id": gid("device:" + name),
+            "deviceName": name,
+            "ownerUpn": rec["upn"],
+            "platform": plat,
+            "fixture": False,
+            "managed": managed,
+            "osUpdatePendingDays": rnd.below(10),
+            "encryption": True,
+            "defenderSignatureAgeDays": rnd.below(4),
+            "lastCheckInDays": rnd.below(3),
+            "jailbroken": False,
+        }
         if managed != "corporate":
-            d.update({"complianceState": "unmanaged", "nonComplianceReasons": ["device_not_enrolled"], "lastCheckInDays": None})
+            d.update(
+                {
+                    "complianceState": "unmanaged",
+                    "nonComplianceReasons": ["device_not_enrolled"],
+                    "lastCheckInDays": None,
+                }
+            )
         else:
             reason = rnd.weighted(comp_w)
             if reason == "compliant":
@@ -272,9 +346,19 @@ def main() -> None:
         if rnd.below(100) < 65:
             ios = rnd.below(100) < 60
             mname = f"NW-MOB-{rec['employeeId']}"
-            md = {"id": gid("device:" + mname), "deviceName": mname, "ownerUpn": rec["upn"], "platform": "iOS" if ios else "Android", "fixture": False,
-                  "managed": "corporate", "osUpdatePendingDays": rnd.below(8), "encryption": True, "lastCheckInDays": rnd.below(3), "jailbroken": False,
-                  "complianceState": "compliant"}
+            md = {
+                "id": gid("device:" + mname),
+                "deviceName": mname,
+                "ownerUpn": rec["upn"],
+                "platform": "iOS" if ios else "Android",
+                "fixture": False,
+                "managed": "corporate",
+                "osUpdatePendingDays": rnd.below(8),
+                "encryption": True,
+                "lastCheckInDays": rnd.below(3),
+                "jailbroken": False,
+                "complianceState": "compliant",
+            }
             if rnd.below(1000) < 12:
                 md["complianceState"] = "noncompliant"
                 md["jailbroken"] = True
@@ -294,12 +378,32 @@ def main() -> None:
     # groups
     groups, memberships = [], []
     for dept, _ in DEPARTMENTS:
-        groups.append({"id": gid("group:dyn:" + dept), "displayName": f"SG-Dyn-Dept-{ascii_slug(dept).upper()}", "groupType": "dynamic", "classification": "Internal",
-                       "owners": [], "membershipRule": f"user.department -eq \"{dept}\"", "requestableViaServiceDesk": False, "fixture": False})
-    for cc, locs in sorted(LOCATIONS.items()):
+        groups.append(
+            {
+                "id": gid("group:dyn:" + dept),
+                "displayName": f"SG-Dyn-Dept-{ascii_slug(dept).upper()}",
+                "groupType": "dynamic",
+                "classification": "Internal",
+                "owners": [],
+                "membershipRule": f'user.department -eq "{dept}"',
+                "requestableViaServiceDesk": False,
+                "fixture": False,
+            }
+        )
+    for _cc, locs in sorted(LOCATIONS.items()):
         for loc, _ in locs:
-            groups.append({"id": gid("group:loc:" + loc), "displayName": f"SG-Dyn-Loc-{ascii_slug(loc).upper()}", "groupType": "dynamic", "classification": "Internal",
-                           "owners": [], "membershipRule": f"user.officeLocation -eq \"{loc}\"", "requestableViaServiceDesk": False, "fixture": False})
+            groups.append(
+                {
+                    "id": gid("group:loc:" + loc),
+                    "displayName": f"SG-Dyn-Loc-{ascii_slug(loc).upper()}",
+                    "groupType": "dynamic",
+                    "classification": "Internal",
+                    "owners": [],
+                    "membershipRule": f'user.officeLocation -eq "{loc}"',
+                    "requestableViaServiceDesk": False,
+                    "fixture": False,
+                }
+            )
     by_dept: dict[str, list] = {}
     for rec in out_users:
         by_dept.setdefault(rec["department"], []).append(rec["upn"])
@@ -308,8 +412,18 @@ def main() -> None:
         cls = rnd.weighted([("Internal", 70), ("Confidential", 25), ("Restricted", 5)])
         name = f"SG-App-{app}-Users"
         owner = owner_for(dept)
-        groups.append({"id": gid("group:" + name), "displayName": name, "groupType": "security", "classification": cls, "owners": [owner],
-                       "requestableViaServiceDesk": True, "description": f"Access to {app}", "fixture": False})
+        groups.append(
+            {
+                "id": gid("group:" + name),
+                "displayName": name,
+                "groupType": "security",
+                "classification": cls,
+                "owners": [owner],
+                "requestableViaServiceDesk": True,
+                "description": f"Access to {app}",
+                "fixture": False,
+            }
+        )
         pool = by_dept[dept]
         for _ in range(60 + rnd.below(240)):
             memberships.append({"group": name, "upn": rnd.choice(pool)})
@@ -317,8 +431,18 @@ def main() -> None:
         dept = rnd.choice([d for d, _ in DEPARTMENTS])
         name = f"M365-Proj-{code}"
         owner = owner_for(dept)
-        groups.append({"id": gid("group:" + name), "displayName": name, "groupType": "m365", "classification": "Internal", "owners": [owner],
-                       "requestableViaServiceDesk": True, "description": f"Project {code} Team", "fixture": False})
+        groups.append(
+            {
+                "id": gid("group:" + name),
+                "displayName": name,
+                "groupType": "m365",
+                "classification": "Internal",
+                "owners": [owner],
+                "requestableViaServiceDesk": True,
+                "description": f"Project {code} Team",
+                "fixture": False,
+            }
+        )
         pool = by_dept[dept]
         for _ in range(8 + rnd.below(40)):
             memberships.append({"group": name, "upn": rnd.choice(pool)})
@@ -335,12 +459,36 @@ def main() -> None:
     # sites
     sites = []
     for dept, _ in DEPARTMENTS:
-        sites.append({"id": gid("site:dept:" + dept), "name": f"Dept-{ascii_slug(dept)}", "sensitivityLabel": "Internal", "externalSharing": "Disabled", "owners": [owner_for(dept)], "fixture": False})
+        sites.append(
+            {
+                "id": gid("site:dept:" + dept),
+                "name": f"Dept-{ascii_slug(dept)}",
+                "sensitivityLabel": "Internal",
+                "externalSharing": "Disabled",
+                "owners": [owner_for(dept)],
+                "fixture": False,
+            }
+        )
     for code in CODENAMES:
         label = rnd.weighted([("Internal", 80), ("Confidential", 15), ("Restricted", 5)])
-        sharing = "Disabled" if label == "Restricted" else rnd.weighted([("Disabled", 40), ("ExistingGuests", 35), ("NewAndExistingGuests", 25)])
+        sharing = (
+            "Disabled"
+            if label == "Restricted"
+            else rnd.weighted(
+                [("Disabled", 40), ("ExistingGuests", 35), ("NewAndExistingGuests", 25)]
+            )
+        )
         dept = rnd.choice([d for d, _ in DEPARTMENTS])
-        sites.append({"id": gid("site:proj:" + code), "name": f"Proj-{code}", "sensitivityLabel": label, "externalSharing": sharing, "owners": [owner_for(dept)], "fixture": False})
+        sites.append(
+            {
+                "id": gid("site:proj:" + code),
+                "name": f"Proj-{code}",
+                "sensitivityLabel": label,
+                "externalSharing": sharing,
+                "owners": [owner_for(dept)],
+                "fixture": False,
+            }
+        )
 
     # HR records for generated users
     hr = []
@@ -348,7 +496,16 @@ def main() -> None:
         year = 2012 + rnd.below(14)
         month = 1 + rnd.below(12)
         day = 1 + rnd.below(28)
-        hr.append({"upn": rec["upn"], "status": "active", "startDate": f"{year}-{month:02d}-{day:02d}", "jobFamily": rec["department"][:3].upper(), "trainingComplete": True, "legalHold": False})
+        hr.append(
+            {
+                "upn": rec["upn"],
+                "status": "active",
+                "startDate": f"{year}-{month:02d}-{day:02d}",
+                "jobFamily": rec["department"][:3].upper(),
+                "trainingComplete": True,
+                "legalHold": False,
+            }
+        )
 
     files = {
         "users.jsonl": out_users,
@@ -360,12 +517,24 @@ def main() -> None:
     }
     manifest = {"generator": "tools/gen_company.py", "seed": SEED, "files": {}}
     for fname, rows in files.items():
-        data = "".join(json.dumps(r, sort_keys=True, separators=(",", ":"), ensure_ascii=False) + "\n" for r in rows)
+        data = "".join(
+            json.dumps(r, sort_keys=True, separators=(",", ":"), ensure_ascii=False) + "\n"
+            for r in rows
+        )
         (GEN / fname).write_bytes(data.encode("utf-8"))
-        manifest["files"][fname] = {"records": len(rows), "sha256": hashlib.sha256(data.encode("utf-8")).hexdigest()}
+        manifest["files"][fname] = {
+            "records": len(rows),
+            "sha256": hashlib.sha256(data.encode("utf-8")).hexdigest(),
+        }
     total_staff = len(out_users) + len(fixture_staff)
-    manifest["totals"] = {"generated_users": len(out_users), "fixture_staff": len(fixture_staff), "total_staff": total_staff}
-    (ROOT / "data" / "MANIFEST.json").write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8", newline="\n")
+    manifest["totals"] = {
+        "generated_users": len(out_users),
+        "fixture_staff": len(fixture_staff),
+        "total_staff": total_staff,
+    }
+    (ROOT / "data" / "MANIFEST.json").write_text(
+        json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8", newline="\n"
+    )
     print(json.dumps(manifest["totals"]))
     for f, v in manifest["files"].items():
         print(f, v["records"], v["sha256"][:16])
